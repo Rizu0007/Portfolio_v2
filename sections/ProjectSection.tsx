@@ -90,7 +90,7 @@ const projects = [
     bgColor: "bg-[#A6CECE]",
   },
   {
-    title: "Comsats coin",
+    title: "Comsats accommodation platform",
     type: "Backend",
     image: (
       <Image
