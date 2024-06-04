@@ -91,7 +91,7 @@ const projects = [
   },
   {
     title: "Comsats accommodation platform",
-    type: "Backend",
+    type: "Full stack",
     image: (
       <Image
         src={house}
