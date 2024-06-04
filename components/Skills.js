@@ -1,6 +1,6 @@
 import React from "react";
 import html from '../assets/ex/html.png'
-import css from  '../assets/ex/css.png'
+import css from '../assets/ex/css.png'
 import react from '../assets/ex/react.png'
 import javascript from '../assets/ex/javascript.png'
 import tailwind from '../assets/ex/tailwind.png'
@@ -8,10 +8,6 @@ import nextjs from '../assets/ex/nextjs.png'
 import graphql from '../assets/ex/graphql.png'
 import github from '../assets/ex/github.png'
 import Image from "next/image";
-
-
-
-
 
 const Experience = () => {
   const techs = [
@@ -31,7 +27,7 @@ const Experience = () => {
       id: 3,
       src: javascript,
       title: "JavaScript",
-      style: "//shadow-yellow-500",
+      style: "shadow-yellow-500",
     },
     {
       id: 4,
@@ -68,9 +64,9 @@ const Experience = () => {
   return (
     <div
       name="experience"
-      className="bg-gradient-to-b from-gray-800 to-black w-full h-screen"
+      className="bg-gradient-to-b from-gray-800 to-black dark:bg-gradient-to-b dark:from-gray-800 dark:to-black w-full h-screen"
     >
-      <div className="max-w-screen-lg mx-auto p-4 flex flex-col justify-center w-full h-full text-white">
+      <div className="max-w-screen-lg mx-auto p-4 flex flex-col justify-center w-full h-full text-gray-900 dark:text-white">
         <div>
           <p className="text-4xl font-bold border-b-4 border-gray-500 p-2 inline">
             Experience
