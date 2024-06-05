@@ -97,7 +97,7 @@ const AboutSection: React.FC = () => {
   const { onSectionChange } = useSection();
   useEffect(() => {
     aboutSection ? onSectionChange!("who am i?") : onSectionChange!("");
-  }, [aboutSection]);
+  }, [aboutSection, onSectionChange]);
 
   return (
     <div
