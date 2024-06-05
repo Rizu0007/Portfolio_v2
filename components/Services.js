@@ -27,12 +27,12 @@ const Myskills = () => {
       </div>
 
 
-      <div className="w-8/12  bg-neutral-200 dark:bg-gray-600	">
+      <div className="w-8/12  bg-neutral-200  dark:bg-[#1B2731]	">
         
         <motion.div
         whileHover={{scale:[null,1.2,1.1]}}
         transition={{duration:0.3}}
-        className="flex flex-col items-center bg-gray-800 rounded p-2 space-y-2 drop-shadow-xl">
+        className="flex flex-col items-center bg-white  dark:bg-[#1B2731] rounded p-2 space-y-2 drop-shadow-xl">
             <div className="bg-gray-800 p-2 rounded-full">
 
             </div>
