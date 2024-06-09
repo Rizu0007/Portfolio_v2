@@ -137,7 +137,7 @@ const projects = [
         className="transition-transform duration-500 hover:scale-110 object-cover"
       />
     ),
-    desc: "Developed a feature-rich blog platform using Next.js and Prisma, categorizing content to highlight top and latest post from the user",
+    desc: "Developed a  blog platform using Next.js and Prisma, categorizing content to highlight top and latest post from the user",
     tags: ["next.js", "TypeScript", "Prisma", "TailwindCSS"],
     liveUrl: "https://dailyblog-demo.vercel.app/",
     codeUrl: "https://github.com/Rizu0007/exploreX.git",
