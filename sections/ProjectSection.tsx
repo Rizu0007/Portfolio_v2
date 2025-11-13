@@ -1,8 +1,10 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { RoughNotation } from "react-rough-notation";
 import { useTheme } from "next-themes";
-import  coin from '.././public/projects/coin.png'
+import coin from '.././public/projects/coin.png'
 import portfo from '.././public/projects/portfo.png'
 import comsats from '.././public/projects/comsats.png'
 
@@ -23,16 +25,75 @@ const ProjectSection: React.FC = () => {
   const { theme } = useTheme();
 
   const sectionRef = useRef<HTMLDivElement>(null);
-
   const elementRef = useRef<HTMLDivElement>(null);
   const isOnScreen = useOnScreen(elementRef);
 
   // Set active link for project section
   const projectSection = useScrollActive(sectionRef);
   const { onSectionChange } = useSection();
+
   useEffect(() => {
     projectSection && onSectionChange!("projects");
   }, [projectSection]);
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const q = gsap.utils.selector(sectionRef);
+
+    // Animate section heading and description
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 80%",
+        toggleActions: "play none none reverse",
+      },
+    });
+
+    tl.fromTo(
+      q(".project-title"),
+      { opacity: 0, y: 40, scale: 0.95 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.7,
+        ease: "power3.out",
+      }
+    )
+    .fromTo(
+      q(".project-desc"),
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      },
+      "-=0.4"
+    );
+
+    // Animate "other projects" link at bottom
+    gsap.fromTo(
+      q(".others"),
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1,
+        y: 0,
+        scrollTrigger: {
+          trigger: q(".others"),
+          start: "top 90%",
+          toggleActions: "play none none reverse",
+        },
+        duration: 0.6,
+      }
+    );
+
+    // Cleanup
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
 
   return (
     <section ref={sectionRef} id="projects" className="section">
@@ -48,7 +109,7 @@ const ProjectSection: React.FC = () => {
         </RoughNotation>
       </div>
       <span className="project-desc text-center block mb-4" ref={elementRef}>
-        “Talk is cheap. Show me the code”? I got you. <br />
+        "Talk is cheap. Show me the code"? I got you. <br />
         Here are some of my projects you shouldn't misss
       </span>
       <div className="flex flex-wrap">
@@ -70,7 +131,6 @@ const ProjectSection: React.FC = () => {
 };
 
 const projects = [
-  
   {
     title: "Comsats Cryptocurrency Coin (FYP)",
     type: "Blockchain+ mern stack",

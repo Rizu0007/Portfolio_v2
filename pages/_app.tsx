@@ -8,10 +8,37 @@ import { ProvideSection } from "context/section";
 import "../styles/globals.css";
 
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Script from "next/script";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const cursorRef = useRef(null);
+
+  // Global GSAP Configuration
+  useEffect(() => {
+    // Register ScrollTrigger plugin globally
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Global GSAP configuration
+    gsap.config({
+      force3D: true, // Hardware acceleration for better performance
+      nullTargetWarn: false, // Suppress warnings for null targets
+    });
+
+    // ScrollTrigger configuration
+    ScrollTrigger.config({
+      ignoreMobileResize: true, // Prevent ScrollTrigger recalculation on mobile browser resize
+    });
+
+    // Respect user's reduced motion preference
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (prefersReducedMotion) {
+      gsap.globalTimeline.timeScale(100); // Make animations instant
+    }
+  }, []);
 
   useEffect(() => {
     document.addEventListener("mousemove", (e) => {

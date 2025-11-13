@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useTheme } from "next-themes";
 import { RoughNotation } from "react-rough-notation";
 
@@ -26,21 +28,87 @@ const BlogSection: React.FC<Props> = ({ posts }) => {
   const { theme } = useTheme();
 
   const sectionRef = useRef<HTMLDivElement>(null);
-
   const elementRef = useRef<HTMLDivElement>(null);
+  const swiperRef = useRef<HTMLDivElement>(null);
+  const linkRef = useRef<HTMLDivElement>(null);
   const isOnScreen = useOnScreen(elementRef);
 
   // Set active link for blog section
   const blogSection = useScrollActive(sectionRef);
   const { onSectionChange } = useSection();
+
   useEffect(() => {
     blogSection && onSectionChange!("blog");
   }, [blogSection]);
 
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const q = gsap.utils.selector(sectionRef);
+
+    // Main entrance timeline
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 75%",
+        toggleActions: "play none none reverse",
+      },
+    });
+
+    tl.fromTo(
+      q(".blog-heading-wrapper"),
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: "power3.out",
+      }
+    )
+    .fromTo(
+      elementRef.current,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      },
+      "-=0.4"
+    )
+    .fromTo(
+      swiperRef.current,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      "-=0.3"
+    )
+    .fromTo(
+      linkRef.current,
+      { opacity: 0, scale: 0.9 },
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 0.5,
+        ease: "back.out(1.7)",
+      },
+      "-=0.4"
+    );
+
+    // Cleanup
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
+
   return (
     <div className="bg-[#F5F5F5] dark:bg-[#1B2731]">
       <section ref={sectionRef} id="blog" className="section md:px-10">
-        <div className="text-center">
+        <div className="text-center blog-heading-wrapper">
           <RoughNotation
             type="underline"
             color={`${
@@ -58,7 +126,7 @@ const BlogSection: React.FC<Props> = ({ posts }) => {
           <br className="hidden sm:block" aria-hidden="true" />
           as a documenting practice. Here are some of my recent blog posts.
         </div>
-        <div>
+        <div ref={swiperRef}>
           <Swiper
             modules={[Navigation, Pagination]}
             pagination={{
@@ -95,7 +163,7 @@ const BlogSection: React.FC<Props> = ({ posts }) => {
               </SwiperSlide>
             ))}
           </Swiper>
-          <div className="mt-4 text-center">
+          <div className="mt-4 text-center" ref={linkRef}>
             <Link href="/blog" className="link">
               Read all blog posts{" "}
               <svg
