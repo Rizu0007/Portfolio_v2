@@ -2,10 +2,10 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
-import { LanguageType, useFilter } from "context/filter";
+import { useFilter } from "context/filter";
 
 const BlogHeroSection: React.FC = () => {
-  const { searchText, onSearch, postLanguage, onLanguageChange } = useFilter();
+  const { searchText, onSearch } = useFilter();
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     onSearch!(e.target.value);
@@ -102,37 +102,6 @@ const BlogHeroSection: React.FC = () => {
           </svg>
         </span>
       </label>
-      <div className="flex items-center my-4 md:my-6">
-        <label htmlFor="language" className="mr-2 flex items-center gap-x-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 inline-block"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
-            />
-          </svg>
-          Blog Posts Language:{" "}
-        </label>
-        <select
-          name="language"
-          id="language"
-          className="px-2 py-1 bg-cardlight dark:bg-carddark focus-visible:outline-marrsgreen dark:focus-visible:outline-carrigreen"
-          defaultValue={postLanguage}
-          onChange={(e) => onLanguageChange!(e.target.value as LanguageType)}
-        >
-          <option value="All">All</option>
-          <option value="English">English</option>
-          <option value="Myanmar">Myanmar</option>
-        </select>
-      </div>
     </section>
   );
 };
