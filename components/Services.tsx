@@ -1,18 +1,46 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useTheme } from "next-themes";
+
+// Skills data with proficiency levels
+const skillsData = [
+  {
+    category: "Frontend",
+    skills: [
+      { name: "React.js", level: 90, color: "from-blue-500 to-cyan-500" },
+      { name: "Next.js", level: 85, color: "from-gray-800 to-gray-600" },
+      { name: "TypeScript", level: 80, color: "from-blue-600 to-blue-400" },
+      { name: "Tailwind CSS", level: 95, color: "from-cyan-500 to-teal-400" },
+    ],
+  },
+  {
+    category: "Backend",
+    skills: [
+      { name: "Node.js", level: 85, color: "from-green-600 to-green-400" },
+      { name: "Express", level: 80, color: "from-gray-700 to-gray-500" },
+      { name: "MongoDB", level: 75, color: "from-green-500 to-emerald-400" },
+      { name: "REST APIs", level: 90, color: "from-purple-500 to-pink-500" },
+    ],
+  },
+  {
+    category: "Tools & Others",
+    skills: [
+      { name: "Git & GitHub", level: 85, color: "from-orange-500 to-red-500" },
+      { name: "Redux", level: 75, color: "from-purple-600 to-purple-400" },
+      { name: "GSAP", level: 70, color: "from-green-400 to-lime-400" },
+      { name: "Solidity", level: 65, color: "from-indigo-500 to-blue-500" },
+    ],
+  },
+];
 
 const Myskills = () => {
   const { theme } = useTheme();
   const sectionRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
     const q = gsap.utils.selector(sectionRef);
 
     // Main entrance timeline
@@ -36,233 +64,218 @@ const Myskills = () => {
         ease: "power3.out",
       }
     )
-    // Description fades up
-    .fromTo(
-      descRef.current,
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: "power2.out",
-      },
-      "-=0.4"
-    )
-    // Card scales in with bounce
-    .fromTo(
-      cardRef.current,
-      { opacity: 0, scale: 0.8, rotateY: -15 },
-      {
-        opacity: 1,
-        scale: 1,
-        rotateY: 0,
-        duration: 0.8,
-        ease: "back.out(1.7)",
-      },
-      "-=0.3"
-    )
-    // Skills list stagger from bottom
-    .fromTo(
-      q("li"),
-      { opacity: 0, y: 20, x: -20 },
-      {
-        opacity: 1,
-        y: 0,
-        x: 0,
-        stagger: 0.1,
-        duration: 0.5,
-        ease: "power2.out",
-      },
-      "-=0.4"
-    );
-
-    // Hover effect with GSAP (replacing Framer Motion)
-    const card = cardRef.current;
-    if (card) {
-      const handleMouseEnter = () => {
-        gsap.to(card, {
-          scale: 1.05,
-          y: -10,
-          boxShadow: "0 20px 40px rgba(0,0,0,0.15)",
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      };
-
-      const handleMouseLeave = () => {
-        gsap.to(card, {
-          scale: 1,
+      // Description fades up
+      .fromTo(
+        descRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
           y: 0,
-          boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
-          duration: 0.3,
+          duration: 0.6,
           ease: "power2.out",
-        });
-      };
+        },
+        "-=0.4"
+      )
+      // Category cards stagger in
+      .fromTo(
+        q(".skill-category"),
+        { opacity: 0, y: 60, scale: 0.9 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          stagger: 0.15,
+          duration: 0.7,
+          ease: "back.out(1.2)",
+        },
+        "-=0.3"
+      );
 
-      card.addEventListener("mouseenter", handleMouseEnter);
-      card.addEventListener("mouseleave", handleMouseLeave);
+    // Animate skill bars when they come into view
+    const skillBars = q(".skill-bar-fill");
+    skillBars.forEach((bar: HTMLElement) => {
+      const level = bar.getAttribute("data-level");
+      gsap.fromTo(
+        bar,
+        { width: "0%" },
+        {
+          width: `${level}%`,
+          duration: 1.5,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: bar,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    });
 
-      return () => {
-        card.removeEventListener("mouseenter", handleMouseEnter);
-        card.removeEventListener("mouseleave", handleMouseLeave);
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      };
-    }
+    // Animate percentage counters
+    const percentages = q(".skill-percentage");
+    percentages.forEach((percent: HTMLElement) => {
+      const level = parseInt(percent.getAttribute("data-level") || "0");
+      const counter = { val: 0 };
+
+      gsap.to(counter, {
+        val: level,
+        duration: 1.5,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: percent,
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+        onUpdate: () => {
+          percent.textContent = Math.floor(counter.val) + "%";
+        },
+      });
+    });
+
+    // Cleanup
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
   }, []);
 
   return (
-    <div
+    <section
       ref={sectionRef}
-      className="w-full md:w-5/5 m-auto py-50 flex flex-col md:flex-row justify-between items-center p-5"
+      className="w-full py-20 px-4 sm:px-8 md:px-20 bg-gradient-to-b from-white via-gray-50 to-white dark:from-[#0B1120] dark:via-[#1B2731] dark:to-[#0B1120]"
     >
-      <div className="w-full md:w-1/3 p-5 space-y-50 mx-10">
-        <h1
-          ref={headingRef}
-          className="text-5xl md:text-6xl font-bold mr-10"
-        >
-          My Development Skills
-        </h1>
-        <p ref={descRef} className="text-gray-500">
-          I value simple content structure, clean design patterns, and
-          thoughtful interactions. I like to code things from scratch, and
-          enjoy bringing ideas to life in the browser. I genuinely care about
-          people, and love helping fellow designers work on their craft.
-        </p>
-      </div>
+      <div className="max-w-7xl mx-auto">
+        {/* Header Section */}
+        <div className="text-center mb-16">
+          <h1
+            ref={headingRef}
+            className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-marrsgreen via-teal-500 to-carrigreen dark:from-carrigreen dark:via-teal-400 dark:to-marrsgreen bg-clip-text text-transparent"
+          >
+            My Development Skills
+          </h1>
+          <p
+            ref={descRef}
+            className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed"
+          >
+            Crafting exceptional digital experiences with modern technologies.
+            From pixel-perfect frontends to robust backends, I bring ideas to
+            life with clean, scalable code.
+          </p>
+        </div>
 
-      <div className="w-8/12 bg-neutral-200 dark:bg-[#1B2731]">
-        <div
-          ref={cardRef}
-          className="flex flex-col items-center bg-white dark:bg-[#1B2731] rounded p-2 space-y-2 drop-shadow-xl cursor-pointer transform-gpu"
-          style={{ transformStyle: "preserve-3d" }}
-        >
-          <div className="bg-gray-800 p-2 rounded-full"></div>
-          <p className="section-heading">Mern stack Skills</p>
-          <ul className="space-y-4 text-left text-gray-500 dark:text-gray-400">
-            <li className="flex items-center space-x-3">
-              <svg
-                className="flex-shrink-0 w-3.5 h-3.5 text-green-500 dark:text-green-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 16 12"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M1 5.917 5.724 10.5 15 1.5"
-                />
-              </svg>
-              <span className="text-bold text-gray-900 dark:text-white">
-                React.js
-              </span>
-            </li>
-            <li className="flex items-center space-x-3">
-              <svg
-                className="flex-shrink-0 w-3.5 h-3.5 text-green-500 dark:text-green-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 16 12"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M1 5.917 5.724 10.5 15 1.5"
-                />
-              </svg>
-              <span className="text-bold text-gray-900 dark:text-white">
-                Next.js
-              </span>
-            </li>
-            <li className="flex items-center space-x-3">
-              <svg
-                className="flex-shrink-0 w-3.5 h-3.5 text-green-500 dark:text-green-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 16 12"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M1 5.917 5.724 10.5 15 1.5"
-                />
-              </svg>
-              <span className="font-semibold text-gray-900 dark:text-white">
-                Node
-              </span>
-            </li>
-            <li className="flex items-center space-x-3">
-              <svg
-                className="flex-shrink-0 w-3.5 h-3.5 text-green-500 dark:text-green-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 16 12"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M1 5.917 5.724 10.5 15 1.5"
-                />
-              </svg>
-              <span className="font-semibold text-gray-900 dark:text-white">
-                MongoDB
-              </span>
-            </li>
-            <li className="flex items-center space-x-3">
-              <svg
-                className="flex-shrink-0 w-3.5 h-3.5 text-green-500 dark:text-green-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 16 12"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M1 5.917 5.724 10.5 15 1.5"
-                />
-              </svg>
-              <span className="font-semibold text-gray-900 dark:text-white">
-                Redux
-              </span>
-            </li>
-            <li className="flex items-center space-x-3">
-              <svg
-                className="flex-shrink-0 w-3.5 h-3.5 text-green-500 dark:text-green-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 16 12"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M1 5.917 5.724 10.5 15 1.5"
-                />
-              </svg>
-              <span className="font-semibold text-gray-900 dark:text-white">
-                Tailwind CSS
-              </span>
-            </li>
-          </ul>
+        {/* Skills Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10">
+          {skillsData.map((category, categoryIndex) => (
+            <div
+              key={category.category}
+              className="skill-category group"
+            >
+              {/* Category Card */}
+              <div className="relative h-full p-8 rounded-2xl bg-white dark:bg-[#1B2731] shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-gray-800 overflow-hidden transform-gpu hover:-translate-y-2">
+                {/* Gradient Background Effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-marrsgreen/5 via-transparent to-carrigreen/5 dark:from-carrigreen/10 dark:via-transparent dark:to-marrsgreen/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                {/* Animated Border Glow */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-marrsgreen via-teal-500 to-carrigreen blur-xl -z-10 group-hover:blur-2xl" />
+
+                {/* Category Header */}
+                <div className="relative z-10 mb-8">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-marrsgreen to-carrigreen dark:from-carrigreen dark:to-marrsgreen flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <span className="text-white text-xl font-bold">
+                        {category.category.charAt(0)}
+                      </span>
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                      {category.category}
+                    </h3>
+                  </div>
+                  <div className="h-1 w-16 bg-gradient-to-r from-marrsgreen to-carrigreen dark:from-carrigreen dark:to-marrsgreen rounded-full group-hover:w-full transition-all duration-500" />
+                </div>
+
+                {/* Skills List */}
+                <div className="relative z-10 space-y-6">
+                  {category.skills.map((skill, skillIndex) => (
+                    <div
+                      key={skill.name}
+                      className="skill-item group/item"
+                    >
+                      {/* Skill Name and Percentage */}
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-base font-semibold text-gray-800 dark:text-gray-200 group-hover/item:text-marrsgreen dark:group-hover/item:text-carrigreen transition-colors">
+                          {skill.name}
+                        </span>
+                        <span
+                          className="skill-percentage text-sm font-bold text-gray-600 dark:text-gray-400"
+                          data-level={skill.level}
+                        >
+                          0%
+                        </span>
+                      </div>
+
+                      {/* Animated Progress Bar */}
+                      <div className="relative h-2.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden shadow-inner">
+                        {/* Background Glow */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse" />
+
+                        {/* Fill Bar */}
+                        <div
+                          className={`skill-bar-fill absolute inset-y-0 left-0 rounded-full bg-gradient-to-r ${skill.color} shadow-lg transition-all duration-300 group-hover/item:shadow-xl`}
+                          data-level={skill.level}
+                          style={{ width: "0%" }}
+                        >
+                          {/* Shine Effect */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12" />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Card Footer Badge */}
+                <div className="relative z-10 mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-gray-500 dark:text-gray-400 font-medium">
+                      {category.skills.length} Technologies
+                    </span>
+                    <div className="flex items-center gap-1">
+                      {[...Array(3)].map((_, i) => (
+                        <div
+                          key={i}
+                          className="w-2 h-2 rounded-full bg-gradient-to-r from-marrsgreen to-carrigreen dark:from-carrigreen dark:to-marrsgreen"
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom Stats Section */}
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+          {[
+            { label: "Projects", value: "15+", icon: "🚀" },
+            { label: "Technologies", value: "12+", icon: "⚡" },
+            { label: "Experience", value: "1+ Yrs", icon: "💼" },
+            { label: "Lines of Code", value: "50K+", icon: "💻" },
+          ].map((stat, index) => (
+            <div
+              key={stat.label}
+              className="stat-card text-center p-6 rounded-xl bg-white dark:bg-[#1B2731] shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 dark:border-gray-800"
+            >
+              <div className="text-4xl mb-2">{stat.icon}</div>
+              <div className="text-3xl font-bold text-marrsgreen dark:text-carrigreen mb-1">
+                {stat.value}
+              </div>
+              <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+                {stat.label}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
