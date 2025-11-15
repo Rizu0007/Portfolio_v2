@@ -94,12 +94,6 @@ const skillsData = [
     gradient: "from-orange-500 via-red-500 to-orange-600",
     shadow: "shadow-orange-500/50",
   },
-  {
-    name: "Solidity",
-    icon: "💎",
-    gradient: "from-indigo-500 via-blue-500 to-indigo-600",
-    shadow: "shadow-indigo-500/50",
-  },
 ];
 
 const Myskills = () => {
@@ -187,7 +181,7 @@ const Myskills = () => {
     // Continuous floating animation for all cards
     skillCards.forEach((card: HTMLElement, index: number) => {
       gsap.to(card, {
-        y: "+=15",
+        y: "+=8",
         duration: 2 + index * 0.1,
         repeat: -1,
         yoyo: true,
@@ -204,8 +198,8 @@ const Myskills = () => {
         const y = e.clientY - rect.top;
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -15;
-        const rotateY = ((x - centerX) / centerX) * 15;
+        const rotateX = ((y - centerY) / centerY) * -8;
+        const rotateY = ((x - centerX) / centerX) * 8;
 
         gsap.to(card, {
           rotationX: rotateX,
@@ -304,15 +298,15 @@ const Myskills = () => {
         </div>
 
         {/* Modern Skills Grid - No Progress Bars */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-10">
           {skillsData.map((skill, index) => (
             <div
               key={skill.name}
-              className="skill-card relative group cursor-pointer"
-              style={{ transformStyle: "preserve-3d" }}
+              className="skill-card relative group cursor-pointer isolate"
+              style={{ transformStyle: "preserve-3d", zIndex: 1 }}
             >
               {/* Card Container with 3D depth */}
-              <div className="relative h-full p-6 md:p-8 rounded-2xl bg-white dark:bg-[#1B2731] shadow-xl border border-gray-100 dark:border-gray-800 overflow-hidden transform-gpu transition-all duration-500">
+              <div className="relative h-full p-4 md:p-5 rounded-2xl bg-white dark:bg-[#1B2731] shadow-xl border border-gray-100 dark:border-gray-800 overflow-hidden transform-gpu transition-all duration-500">
 
                 {/* Animated gradient glow effect */}
                 <div className="glow-effect absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -335,18 +329,18 @@ const Myskills = () => {
                 </div>
 
                 {/* Icon with 3D transform */}
-                <div className="relative z-10 flex flex-col items-center justify-center h-full gap-4">
+                <div className="relative z-10 flex flex-col items-center justify-center h-full gap-3">
                   <div
-                    className={`w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br ${skill.gradient} flex items-center justify-center shadow-2xl ${skill.shadow} group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 transform-gpu`}
+                    className={`w-12 h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-br ${skill.gradient} flex items-center justify-center shadow-2xl ${skill.shadow} group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 transform-gpu`}
                     style={{ transformStyle: "preserve-3d" }}
                   >
-                    <span className="text-3xl md:text-4xl font-bold text-white">
+                    <span className="text-2xl md:text-3xl font-bold text-white">
                       {skill.icon}
                     </span>
                   </div>
 
                   {/* Skill name */}
-                  <h3 className="text-base md:text-lg font-bold text-gray-900 dark:text-white text-center group-hover:scale-110 transition-transform duration-300">
+                  <h3 className="text-sm md:text-base font-bold text-gray-900 dark:text-white text-center group-hover:scale-110 transition-transform duration-300">
                     {skill.name}
                   </h3>
 
@@ -371,13 +365,13 @@ const Myskills = () => {
         <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
             { label: "Projects", value: "20+", icon: "🚀", color: "from-blue-500 to-cyan-500" },
-            { label: "Technologies", value: "16+", icon: "⚡", color: "from-purple-500 to-pink-500" },
+            { label: "Technologies", value: "15+", icon: "⚡", color: "from-purple-500 to-pink-500" },
             { label: "Experience", value: "2+ Yrs", icon: "💼", color: "from-green-500 to-emerald-500" },
             { label: "Lines of Code", value: "100K+", icon: "💻", color: "from-orange-500 to-red-500" },
           ].map((stat, index) => (
             <div
               key={stat.label}
-              className="stat-card relative text-center p-6 rounded-2xl bg-white dark:bg-[#1B2731] shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 border border-gray-100 dark:border-gray-800 group cursor-pointer overflow-hidden"
+              className="stat-card relative text-center p-4 md:p-5 rounded-2xl bg-white dark:bg-[#1B2731] shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 border border-gray-100 dark:border-gray-800 group cursor-pointer overflow-hidden isolate"
             >
               {/* Background gradient pulse */}
               <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
