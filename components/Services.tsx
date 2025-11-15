@@ -35,7 +35,13 @@ const skillsData = [
     shadow: "shadow-green-500/50",
   },
   {
-    name: "Express",
+    name: "Nest.js",
+    icon: "🐈",
+    gradient: "from-red-500 via-pink-500 to-red-600",
+    shadow: "shadow-red-500/50",
+  },
+  {
+    name: "Express.js",
     icon: "⚡",
     gradient: "from-gray-700 via-gray-600 to-gray-500",
     shadow: "shadow-gray-500/50",
@@ -47,28 +53,46 @@ const skillsData = [
     shadow: "shadow-green-500/50",
   },
   {
-    name: "REST APIs",
+    name: "PostgreSQL",
+    icon: "🐘",
+    gradient: "from-blue-700 via-blue-600 to-blue-500",
+    shadow: "shadow-blue-600/50",
+  },
+  {
+    name: "LangChain",
+    icon: "🔗",
+    gradient: "from-yellow-500 via-orange-500 to-yellow-600",
+    shadow: "shadow-yellow-500/50",
+  },
+  {
+    name: "GraphQL",
+    icon: "◆",
+    gradient: "from-pink-600 via-purple-500 to-pink-500",
+    shadow: "shadow-pink-500/50",
+  },
+  {
+    name: "AWS",
+    icon: "☁️",
+    gradient: "from-orange-600 via-yellow-500 to-orange-500",
+    shadow: "shadow-orange-500/50",
+  },
+  {
+    name: "WebSockets",
     icon: "🔌",
     gradient: "from-purple-500 via-pink-500 to-purple-600",
     shadow: "shadow-purple-500/50",
+  },
+  {
+    name: "Chart.js",
+    icon: "📊",
+    gradient: "from-teal-500 via-cyan-500 to-teal-600",
+    shadow: "shadow-teal-500/50",
   },
   {
     name: "Git & GitHub",
     icon: "🔥",
     gradient: "from-orange-500 via-red-500 to-orange-600",
     shadow: "shadow-orange-500/50",
-  },
-  {
-    name: "Redux",
-    icon: "🔮",
-    gradient: "from-purple-600 via-purple-500 to-purple-400",
-    shadow: "shadow-purple-500/50",
-  },
-  {
-    name: "GSAP",
-    icon: "✨",
-    gradient: "from-green-400 via-lime-400 to-green-500",
-    shadow: "shadow-green-500/50",
   },
   {
     name: "Solidity",
@@ -326,10 +350,10 @@ const Myskills = () => {
         {/* Stats Section with Advanced Animations */}
         <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
-            { label: "Projects", value: "15+", icon: "🚀", color: "from-blue-500 to-cyan-500" },
-            { label: "Technologies", value: "12+", icon: "⚡", color: "from-purple-500 to-pink-500" },
-            { label: "Experience", value: "1+ Yrs", icon: "💼", color: "from-green-500 to-emerald-500" },
-            { label: "Lines of Code", value: "50K+", icon: "💻", color: "from-orange-500 to-red-500" },
+            { label: "Projects", value: "20+", icon: "🚀", color: "from-blue-500 to-cyan-500" },
+            { label: "Technologies", value: "16+", icon: "⚡", color: "from-purple-500 to-pink-500" },
+            { label: "Experience", value: "2+ Yrs", icon: "💼", color: "from-green-500 to-emerald-500" },
+            { label: "Lines of Code", value: "100K+", icon: "💻", color: "from-orange-500 to-red-500" },
           ].map((stat, index) => (
             <div
               key={stat.label}

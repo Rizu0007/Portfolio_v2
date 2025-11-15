@@ -132,8 +132,50 @@ const ProjectSection: React.FC = () => {
 
 const projects = [
   {
+    title: "Xeko.ai - AI RAG Chatbot Platform",
+    type: "AI/ML + Full Stack",
+    image: (
+      <div className="w-full h-full bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700 flex items-center justify-center">
+        <span className="text-6xl">🤖</span>
+      </div>
+    ),
+    desc: "Leading development of an AI-powered RAG chatbot platform using LangChain orchestration. Built ETL pipeline for web crawling, hybrid search with Qdrant vector database, and MCP integrations with Shopify, Contentful, WooCommerce. Reduced response latency by 35% with contextual compression and multi-query generation.",
+    tags: ["LangChain", "Qdrant", "OpenAI", "MCP", "Next.js"],
+    liveUrl: "#",
+    codeUrl: "#",
+    bgColor: "bg-[#9D84B7]",
+  },
+  {
+    title: "UpInvest - Stock Market Platform",
+    type: "Full Stack + Real-time",
+    image: (
+      <div className="w-full h-full bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-700 flex items-center justify-center">
+        <span className="text-6xl">📈</span>
+      </div>
+    ),
+    desc: "High-performance stock market platform with portfolio management and real-time market tracking. Engineered with Next.js, Nest.js, PostgreSQL. Implemented advanced caching strategies achieving 60% faster response times and 98% uptime. Built responsive dashboards with trend analysis capabilities.",
+    tags: ["Next.js", "Nest.js", "PostgreSQL", "WebSockets"],
+    liveUrl: "#",
+    codeUrl: "#",
+    bgColor: "bg-[#7FB3D5]",
+  },
+  {
+    title: "MyArbit - Crypto Investment Tracker",
+    type: "Frontend + Real-time Data",
+    image: (
+      <div className="w-full h-full bg-gradient-to-br from-amber-600 via-orange-600 to-red-700 flex items-center justify-center">
+        <span className="text-6xl">💰</span>
+      </div>
+    ),
+    desc: "Led frontend development for crypto staking and investment tracking platform. Built interactive dashboards with Chart.js for real-time visualizations. Integrated WebSocket connections for live market data updates, driving 45% increase in user engagement with seamless real-time performance.",
+    tags: ["React.js", "Chart.js", "WebSockets", "Tailwind"],
+    liveUrl: "#",
+    codeUrl: "#",
+    bgColor: "bg-[#E8A87C]",
+  },
+  {
     title: "Comsats Cryptocurrency Coin (FYP)",
-    type: "Blockchain+ mern stack",
+    type: "Blockchain + MERN Stack",
     image: (
       <Image
         src={Fyp}
