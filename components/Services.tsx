@@ -113,75 +113,59 @@ const Myskills = () => {
       },
     });
 
-    // Heading with 3D rotation and scale
+    // Heading entrance animation
     tl.fromTo(
       headingRef.current,
       {
         opacity: 0,
-        rotationX: -90,
-        y: -100,
-        scale: 0.5,
-        transformPerspective: 1000,
+        y: -30,
+        scale: 0.95,
       },
       {
         opacity: 1,
-        rotationX: 0,
         y: 0,
         scale: 1,
-        duration: 1.2,
-        ease: "expo.out",
+        duration: 0.8,
+        ease: "power3.out",
       }
     )
     .fromTo(
       descRef.current,
-      { opacity: 0, y: 50, rotationX: 45 },
+      { opacity: 0, y: 20 },
       {
         opacity: 1,
         y: 0,
-        rotationX: 0,
-        duration: 0.8,
-        ease: "back.out(1.5)"
+        duration: 0.6,
+        ease: "power2.out"
       },
-      "-=0.8"
+      "-=0.5"
     );
 
-    // Skill cards with advanced 3D entrance - spiral pattern
+    // Skill cards with clean entrance animation
     const skillCards = q(".skill-card");
     skillCards.forEach((card: HTMLElement, index: number) => {
-      const angle = (index * 360) / skillCards.length;
-      const radius = 200;
-
       tl.fromTo(
         card,
         {
           opacity: 0,
-          scale: 0,
-          rotationY: 180,
-          rotationX: 90,
-          x: Math.cos(angle * Math.PI / 180) * radius,
-          y: Math.sin(angle * Math.PI / 180) * radius,
-          z: -500,
-          transformPerspective: 1000,
+          scale: 0.8,
+          y: 30,
         },
         {
           opacity: 1,
           scale: 1,
-          rotationY: 0,
-          rotationX: 0,
-          x: 0,
           y: 0,
-          z: 0,
-          duration: 1.2,
-          ease: "expo.out",
+          duration: 0.6,
+          ease: "back.out(1.5)",
         },
-        `-=${index === 0 ? 0.3 : 1.1}`
+        `-=${index === 0 ? 0.5 : 0.55}`
       );
     });
 
     // Continuous floating animation for all cards
     skillCards.forEach((card: HTMLElement, index: number) => {
       gsap.to(card, {
-        y: "+=8",
+        y: "+=6",
         duration: 2 + index * 0.1,
         repeat: -1,
         yoyo: true,
@@ -190,65 +174,9 @@ const Myskills = () => {
       });
     });
 
-    // Add 3D tilt effect on mouse move for each card
-    skillCards.forEach((card: HTMLElement) => {
-      const handleMouseMove = (e: MouseEvent) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -8;
-        const rotateY = ((x - centerX) / centerX) * 8;
-
-        gsap.to(card, {
-          rotationX: rotateX,
-          rotationY: rotateY,
-          transformPerspective: 1000,
-          duration: 0.5,
-          ease: "power2.out",
-        });
-
-        // Move glow effect
-        const glow = card.querySelector(".glow-effect") as HTMLElement;
-        if (glow) {
-          gsap.to(glow, {
-            x: x - centerX,
-            y: y - centerY,
-            duration: 0.3,
-          });
-        }
-      };
-
-      const handleMouseLeave = () => {
-        gsap.to(card, {
-          rotationX: 0,
-          rotationY: 0,
-          duration: 0.8,
-          ease: "elastic.out(1, 0.5)",
-        });
-
-        const glow = card.querySelector(".glow-effect") as HTMLElement;
-        if (glow) {
-          gsap.to(glow, {
-            x: 0,
-            y: 0,
-            duration: 0.5,
-          });
-        }
-      };
-
-      card.addEventListener("mousemove", handleMouseMove);
-      card.addEventListener("mouseleave", handleMouseLeave);
-    });
-
     // Cleanup
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      skillCards.forEach((card: HTMLElement) => {
-        card.removeEventListener("mousemove", () => {});
-        card.removeEventListener("mouseleave", () => {});
-      });
     };
   }, []);
 
@@ -256,7 +184,6 @@ const Myskills = () => {
     <section
       ref={sectionRef}
       className="w-full py-20 px-4 sm:px-8 md:px-20 overflow-hidden relative"
-      style={{ perspective: "2000px" }}
     >
       {/* Background animated text */}
       <span
@@ -279,19 +206,17 @@ const Myskills = () => {
       </span>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Header with 3D Transform */}
-        <div className="text-center mb-20" style={{ transformStyle: "preserve-3d" }}>
+        {/* Header */}
+        <div className="text-center mb-20">
           <h1
             ref={headingRef}
             className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-marrsgreen via-teal-500 to-carrigreen dark:from-carrigreen dark:via-teal-400 dark:to-marrsgreen bg-clip-text text-transparent"
-            style={{ transformStyle: "preserve-3d" }}
           >
             My Development Skills
           </h1>
           <p
             ref={descRef}
             className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed"
-            style={{ transformStyle: "preserve-3d" }}
           >
             Crafting exceptional digital experiences with cutting-edge technologies
           </p>
@@ -302,11 +227,10 @@ const Myskills = () => {
           {skillsData.map((skill, index) => (
             <div
               key={skill.name}
-              className="skill-card relative group cursor-pointer isolate"
-              style={{ transformStyle: "preserve-3d", zIndex: 1 }}
+              className="skill-card relative group cursor-pointer"
             >
-              {/* Card Container with 3D depth */}
-              <div className="relative h-full p-4 md:p-5 rounded-2xl bg-white dark:bg-[#1B2731] shadow-xl border border-gray-100 dark:border-gray-800 overflow-hidden transform-gpu transition-all duration-500">
+              {/* Card Container */}
+              <div className="relative h-full p-4 md:p-5 rounded-2xl bg-white dark:bg-[#1B2731] shadow-xl hover:shadow-2xl border border-gray-100 dark:border-gray-800 overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1">
 
                 {/* Animated gradient glow effect */}
                 <div className="glow-effect absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -328,11 +252,10 @@ const Myskills = () => {
                   ))}
                 </div>
 
-                {/* Icon with 3D transform */}
+                {/* Icon */}
                 <div className="relative z-10 flex flex-col items-center justify-center h-full gap-3">
                   <div
-                    className={`w-12 h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-br ${skill.gradient} flex items-center justify-center shadow-2xl ${skill.shadow} group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 transform-gpu`}
-                    style={{ transformStyle: "preserve-3d" }}
+                    className={`w-12 h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-br ${skill.gradient} flex items-center justify-center shadow-2xl ${skill.shadow} group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}
                   >
                     <span className="text-2xl md:text-3xl font-bold text-white">
                       {skill.icon}
