@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { useTheme } from "next-themes";
 
 // Skills data with modern badge design
 const skillsData = [
@@ -80,7 +79,6 @@ const skillsData = [
 ];
 
 const Myskills = () => {
-  const { theme } = useTheme();
   const sectionRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
