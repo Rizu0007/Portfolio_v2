@@ -40,8 +40,8 @@ const Home: NextPage<Props> = ({ blogPosts }) => {
         meta={meta}
       />
       <Loader><span className="text-carrigreen text-bold text-6xl">Rizwan</span>.dev</Loader>
-      <div className="bg-bglight dark:bg-bgdark overflow-hidden">
-        <div className="selection:bg-marrsgreen selection:text-bglight dark:selection:bg-carrigreen dark:selection:text-bgdark">
+      <div className="bg-bglight dark:bg-bgdark overflow-hidden relative">
+        <div className="selection:bg-marrsgreen selection:text-bglight dark:selection:bg-carrigreen dark:selection:text-bgdark relative z-10">
           <SkipToMain />
           <Header />
           <main id="main">

@@ -83,9 +83,29 @@ const AboutSection: React.FC = () => {
     <section
       ref={sectionRef}
       id="whoami"
-      className="w-full py-20 px-4 sm:px-8 md:px-20 bg-gradient-to-b from-white via-gray-50 to-white dark:from-[#0B1120] dark:via-[#1B2731] dark:to-[#0B1120] overflow-hidden relative"
+      className="w-full py-20 px-4 sm:px-8 md:px-20 overflow-hidden relative"
       style={{ perspective: "1000px" }}
     >
+      {/* Background animated text */}
+      <span
+        aria-hidden="true"
+        className="absolute top-20 left-0 right-0 text-center rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+      >
+        PASSIONATE CREATIVE INNOVATIVE
+      </span>
+      <span
+        aria-hidden="true"
+        className="absolute top-60 left-0 right-0 text-center -rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+      >
+        DEVELOPER 2+ YEARS EXPERIENCE
+      </span>
+      <span
+        aria-hidden="true"
+        className="absolute bottom-40 left-0 right-0 text-center rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+      >
+        FULL-STACK AI/ML ENGINEER
+      </span>
+
       {/* Animated background elements with parallax */}
       <motion.div
         style={{ y: y1, opacity }}

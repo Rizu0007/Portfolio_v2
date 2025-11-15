@@ -96,7 +96,28 @@ const ProjectSection: React.FC = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="projects" className="section">
+    <section ref={sectionRef} id="projects" className="section relative overflow-hidden">
+      {/* Background animated text */}
+      <span
+        aria-hidden="true"
+        className="absolute top-10 left-0 right-0 text-center rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+      >
+        INNOVATIVE SOLUTIONS
+      </span>
+      <span
+        aria-hidden="true"
+        className="absolute top-96 left-0 right-0 text-center -rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+      >
+        SCALABLE APPLICATIONS
+      </span>
+      <span
+        aria-hidden="true"
+        className="absolute bottom-40 left-0 right-0 text-center rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+      >
+        RAG CHATBOT FINTECH BLOCKCHAIN
+      </span>
+
+      <div className="relative z-10">
       <div className="project-title text-center">
         <RoughNotation
           type="underline"
@@ -125,6 +146,7 @@ const ProjectSection: React.FC = () => {
         >
           my github profile
         </a>
+      </div>
       </div>
     </section>
   );

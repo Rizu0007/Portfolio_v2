@@ -261,10 +261,30 @@ const Myskills = () => {
   return (
     <section
       ref={sectionRef}
-      className="w-full py-20 px-4 sm:px-8 md:px-20 bg-gradient-to-b from-white via-gray-50 to-white dark:from-[#0B1120] dark:via-[#1B2731] dark:to-[#0B1120] overflow-hidden"
+      className="w-full py-20 px-4 sm:px-8 md:px-20 overflow-hidden relative"
       style={{ perspective: "2000px" }}
     >
-      <div className="max-w-7xl mx-auto">
+      {/* Background animated text */}
+      <span
+        aria-hidden="true"
+        className="absolute top-10 left-0 right-0 text-center rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+      >
+        REACT NEXT.JS NODE.JS TYPESCRIPT
+      </span>
+      <span
+        aria-hidden="true"
+        className="absolute top-96 left-0 right-0 text-center -rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+      >
+        LANGCHAIN POSTGRESQL QDRANT
+      </span>
+      <span
+        aria-hidden="true"
+        className="absolute bottom-20 left-0 right-0 text-center rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+      >
+        MONGODB EXPRESS NEST.JS GRAPHQL
+      </span>
+
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Header with 3D Transform */}
         <div className="text-center mb-20" style={{ transformStyle: "preserve-3d" }}>
           <h1
