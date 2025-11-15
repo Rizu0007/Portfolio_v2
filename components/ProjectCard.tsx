@@ -18,53 +18,185 @@ type Props = {
 
 const ProjectCard: React.FC<Props> = ({ index, project }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   const even = index % 2 === 0 ? true : false;
 
-  // Animations
+  // Entrance animations
   useEffect(() => {
     const q = gsap.utils.selector(sectionRef);
 
     gsap.registerPlugin(ScrollTrigger);
 
+    // Enhanced entrance animation with more dramatic effect
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: `70% bottom`,
+        start: "70% bottom",
+        toggleActions: "play none none reverse",
       },
     });
 
+    // Card entrance - slide up with fade and scale
     tl.fromTo(
-      q(".project-image"),
-      { opacity: 0, y: 100 },
+      cardRef.current,
+      { opacity: 0, y: 80, scale: 0.9 },
       {
         opacity: 1,
         y: 0,
-        ease: "Power3.easeInOut",
-        duration: 0.5,
-        stagger: 0.2,
+        scale: 1,
+        duration: 0.7,
+        ease: "power3.out",
       }
-    )
-      .fromTo(q(".project-text"), { y: 100 }, { y: 0, stagger: 0.2 }, "<25%")
-      .fromTo(
-        q(".project-desc"),
-        { opacity: 0 },
-        { opacity: 1, stagger: 0.2 },
-        "<10%"
-      )
-      .fromTo(
-        q(".project-tags"),
-        { y: -40 },
-        { y: 0, stagger: 0.1, ease: "Elastic.easeOut" },
-        "<25%"
-      );
+    );
+
+    // Image slides in with slight rotation
+    tl.fromTo(
+      q(".project-image"),
+      { opacity: 0, y: 50, rotateX: -15 },
+      {
+        opacity: 1,
+        y: 0,
+        rotateX: 0,
+        ease: "back.out(1.2)",
+        duration: 0.6,
+      },
+      "-=0.5"
+    );
+
+    // Title slides from side based on index
+    tl.fromTo(
+      q(".project-text"),
+      { x: even ? -30 : 30, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 0.5,
+        ease: "power2.out",
+      },
+      "-=0.4"
+    );
+
+    // Description fades in
+    tl.fromTo(
+      q(".project-desc"),
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+      },
+      "-=0.3"
+    );
+
+    // Tags bounce in with elastic effect
+    tl.fromTo(
+      q(".project-tags"),
+      { y: -30, opacity: 0, scale: 0.8 },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        stagger: 0.05,
+        ease: "elastic.out(1, 0.5)",
+        duration: 0.8,
+      },
+      "-=0.4"
+    );
+
+    // Cleanup
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (trigger.vars.trigger === sectionRef.current) {
+          trigger.kill();
+        }
+      });
+    };
+  }, [even, index]);
+
+  // 3D Tilt effect on hover
+  useEffect(() => {
+    const card = cardRef.current;
+    const image = imageRef.current;
+
+    if (!card || !image) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const { left, top, width, height } = card.getBoundingClientRect();
+      const x = (e.clientX - left) / width;
+      const y = (e.clientY - top) / height;
+
+      // Calculate rotation values (-15 to 15 degrees)
+      const rotateY = (x - 0.5) * 15;
+      const rotateX = (y - 0.5) * -15;
+
+      // Tilt the entire card
+      gsap.to(card, {
+        rotationY: rotateY,
+        rotationX: rotateX,
+        transformPerspective: 1000,
+        duration: 0.5,
+        ease: "power2.out",
+      });
+
+      // Image moves slightly more for depth effect
+      gsap.to(image, {
+        x: (x - 0.5) * 20,
+        y: (y - 0.5) * 20,
+        duration: 0.5,
+        ease: "power2.out",
+      });
+    };
+
+    const handleMouseEnter = () => {
+      gsap.to(card, {
+        scale: 1.02,
+        boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
+        duration: 0.3,
+        ease: "power2.out",
+      });
+    };
+
+    const handleMouseLeave = () => {
+      gsap.to(card, {
+        rotationY: 0,
+        rotationX: 0,
+        scale: 1,
+        boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+        duration: 0.5,
+        ease: "power2.out",
+      });
+
+      gsap.to(image, {
+        x: 0,
+        y: 0,
+        duration: 0.5,
+        ease: "power2.out",
+      });
+    };
+
+    card.addEventListener("mousemove", handleMouseMove);
+    card.addEventListener("mouseenter", handleMouseEnter);
+    card.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      card.removeEventListener("mousemove", handleMouseMove);
+      card.removeEventListener("mouseenter", handleMouseEnter);
+      card.removeEventListener("mouseleave", handleMouseLeave);
+    };
   }, []);
 
   return (
-    <div ref={sectionRef} className={`md:basis-1/2 md:px-8 py-2 md:py-4`}>
-      <div className={`project-card project-card-${index}`}>
-        <div className="overflow-hidden">
+    <div ref={sectionRef} className="md:basis-1/2 md:px-8 py-2 md:py-4">
+      <div
+        ref={cardRef}
+        className="project-card project-card-${index} transform-gpu cursor-pointer"
+        style={{ transformStyle: "preserve-3d" }}
+      >
+        <div className="overflow-hidden rounded-t-lg">
           <div
+            ref={imageRef}
             className={`project-image ${project.bgColor} relative aspect-[16/9]`}
           >
             {project.image}
@@ -81,13 +213,13 @@ const ProjectCard: React.FC<Props> = ({ index, project }) => {
                 title={`See '${project.title}' on Github`}
                 target="_blank"
                 rel="noreferrer"
-                className="focus-visible:outline-marrsgreen dark:focus-visible:outline-carrigreen mr-1 rounded-full"
+                className="focus-visible:outline-marrsgreen dark:focus-visible:outline-carrigreen mr-1 rounded-full transition-transform hover:scale-110 hover:rotate-12"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
-                  className="scale-150 sm:scale-125 opacity-75 hover:-rotate-12 fill-black dark:fill-bglight"
+                  className="scale-150 sm:scale-125 opacity-75 fill-black dark:fill-bglight"
                 >
                   <path
                     fillRule="evenodd"
@@ -101,11 +233,11 @@ const ProjectCard: React.FC<Props> = ({ index, project }) => {
                 title={`See live demo of '${project.title}'`}
                 target="_blank"
                 rel="noreferrer"
-                className="focus-visible:outline-marrsgreen dark:focus-visible:outline-carrigreen mr-8 rounded-full"
+                className="focus-visible:outline-marrsgreen dark:focus-visible:outline-carrigreen mr-8 rounded-full transition-transform hover:scale-110 hover:rotate-12"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-7 w-7 scale-125 sm:scale-100 bg-cardlight dark:bg-carddark hover:bg-gray-300 dark:hover:bg-gray-600 rounded-full p-1 hover:-rotate-12"
+                  className="h-7 w-7 scale-125 sm:scale-100 bg-cardlight dark:bg-carddark hover:bg-gray-300 dark:hover:bg-gray-600 rounded-full p-1"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -131,7 +263,7 @@ const ProjectCard: React.FC<Props> = ({ index, project }) => {
           {project.tags.map((tag) => (
             <li
               key={tag}
-              className={`project-tags mr-2 my-1 bg-[#E2EFEF] dark:bg-carddark py-1 px-2 rounded`}
+              className="project-tags mr-2 my-1 bg-[#E2EFEF] dark:bg-carddark py-1 px-2 rounded transition-transform hover:scale-110 hover:-rotate-2 cursor-default"
             >
               {tag}
             </li>
