@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import SocialLinks from "@/components/SocialLinks";
 import HeroSection from "@/sections/HeroSection";
 import AboutSection from "@/sections/AboutSection";
+import ExperienceSection from "@/sections/ExperienceSection";
 import ProjectSection from "@/sections/ProjectSection";
 import BlogSection from "@/sections/BlogSection";
 import ContactSection from "@/sections/ContactSection";
@@ -46,7 +47,8 @@ const Home: NextPage<Props> = ({ blogPosts }) => {
           <main id="main">
             <HeroSection />
             <AboutSection />
-           <Services/>
+            <Services/>
+            <ExperienceSection />
             <ProjectSection />
             <ContactSection />
           </main>
