@@ -66,8 +66,16 @@ const ExperienceSection: React.FC = () => {
     gsap.registerPlugin(ScrollTrigger);
     const q = gsap.utils.selector(sectionRef);
 
-    // Heading animation
-    gsap.fromTo(
+    // Heading animation with subtitle
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 80%",
+        toggleActions: "play none none reverse",
+      },
+    });
+
+    tl.fromTo(
       headingRef.current,
       {
         opacity: 0,
@@ -83,15 +91,15 @@ const ExperienceSection: React.FC = () => {
         scale: 1,
         duration: 1,
         ease: "expo.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        },
       }
+    ).fromTo(
+      q(".subtitle"),
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.6 },
+      "-=0.5"
     );
 
-    // Timeline line animation
+    // Timeline line with glow animation
     gsap.fromTo(
       timelineRef.current,
       { scaleY: 0, transformOrigin: "top" },
@@ -107,12 +115,23 @@ const ExperienceSection: React.FC = () => {
       }
     );
 
+    // Add glow to timeline on scroll
+    gsap.to(q(".timeline-glow"), {
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top center",
+        end: "bottom center",
+        scrub: 1,
+      },
+      opacity: 0.6,
+    });
+
     // Experience cards animation
     const cards = q(".experience-card");
     cards.forEach((card: HTMLElement, index: number) => {
       const isLeft = index % 2 === 0;
 
-      // Card entrance
+      // Card entrance with rotation
       gsap.fromTo(
         card,
         {
@@ -120,14 +139,16 @@ const ExperienceSection: React.FC = () => {
           x: isLeft ? -100 : 100,
           y: 50,
           scale: 0.9,
+          rotationY: isLeft ? -15 : 15,
         },
         {
           opacity: 1,
           x: 0,
           y: 0,
           scale: 1,
-          duration: 0.8,
-          ease: "power3.out",
+          rotationY: 0,
+          duration: 0.9,
+          ease: "expo.out",
           scrollTrigger: {
             trigger: card,
             start: "top 85%",
@@ -136,7 +157,7 @@ const ExperienceSection: React.FC = () => {
         }
       );
 
-      // Timeline dot animation
+      // Timeline dot animation with pulse
       const dot = card.querySelector(".timeline-dot");
       if (dot) {
         gsap.fromTo(
@@ -154,9 +175,52 @@ const ExperienceSection: React.FC = () => {
             },
           }
         );
+
+        // Continuous pulse for active dots
+        if (index === 0) {
+          gsap.to(dot, {
+            boxShadow: "0 0 20px rgba(0, 122, 122, 0.8)",
+            duration: 1.5,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+          });
+        }
       }
 
-      // Tech stack stagger animation
+      // Company icon floating
+      const icon = card.querySelector(".company-icon");
+      if (icon) {
+        gsap.to(icon, {
+          y: "+=8",
+          duration: 2,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: index * 0.2,
+        });
+      }
+
+      // Achievement bullets stagger in
+      const achievements = card.querySelectorAll(".achievement-item");
+      gsap.fromTo(
+        achievements,
+        { opacity: 0, x: -20 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.5,
+          stagger: 0.08,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 75%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+
+      // Tech stack stagger with bounce
       const techBadges = card.querySelectorAll(".tech-badge");
       gsap.fromTo(
         techBadges,
@@ -170,38 +234,75 @@ const ExperienceSection: React.FC = () => {
           ease: "back.out(1.7)",
           scrollTrigger: {
             trigger: card,
-            start: "top 80%",
+            start: "top 75%",
             toggleActions: "play none none reverse",
           },
         }
       );
 
-      // 3D tilt effect on hover
+      // Card content with parallax on scroll
+      const cardContent = card.querySelector(".card-content");
+      if (cardContent) {
+        gsap.to(cardContent, {
+          y: -20,
+          scrollTrigger: {
+            trigger: card,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+      }
+
+      // Enhanced 3D tilt with depth
       card.addEventListener("mousemove", (e: MouseEvent) => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -5;
-        const rotateY = ((x - centerX) / centerX) * 5;
+        const rotateX = ((y - centerY) / centerY) * -8;
+        const rotateY = ((x - centerX) / centerX) * 8;
 
         gsap.to(card, {
           rotationX: rotateX,
           rotationY: rotateY,
+          z: 30,
           transformPerspective: 1000,
           duration: 0.5,
           ease: "power2.out",
         });
+
+        // Move glow with cursor
+        const glow = card.querySelector(".card-glow") as HTMLElement;
+        if (glow) {
+          gsap.to(glow, {
+            x: (x / rect.width) * 100 - 50,
+            y: (y / rect.height) * 100 - 50,
+            opacity: 0.15,
+            duration: 0.3,
+          });
+        }
       });
 
       card.addEventListener("mouseleave", () => {
         gsap.to(card, {
           rotationX: 0,
           rotationY: 0,
-          duration: 0.6,
+          z: 0,
+          duration: 0.7,
           ease: "elastic.out(1, 0.5)",
         });
+
+        const glow = card.querySelector(".card-glow") as HTMLElement;
+        if (glow) {
+          gsap.to(glow, {
+            x: 0,
+            y: 0,
+            opacity: 0,
+            duration: 0.5,
+          });
+        }
       });
     });
 
@@ -226,18 +327,21 @@ const ExperienceSection: React.FC = () => {
           >
             Work Experience
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+          <p className="subtitle text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             Building innovative solutions across AI, fintech, and e-commerce
           </p>
         </div>
 
         {/* Timeline Container */}
         <div className="relative">
-          {/* Timeline Line */}
-          <div
-            ref={timelineRef}
-            className="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-marrsgreen via-teal-500 to-carrigreen dark:from-carrigreen dark:via-teal-400 dark:to-marrsgreen transform md:-translate-x-1/2"
-          />
+          {/* Timeline Line with Glow */}
+          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 transform md:-translate-x-1/2">
+            <div
+              ref={timelineRef}
+              className="w-1 h-full bg-gradient-to-b from-marrsgreen via-teal-500 to-carrigreen dark:from-carrigreen dark:via-teal-400 dark:to-marrsgreen"
+            />
+            <div className="timeline-glow absolute inset-0 w-1 bg-gradient-to-b from-marrsgreen via-teal-500 to-carrigreen dark:from-carrigreen dark:via-teal-400 dark:to-marrsgreen blur-md opacity-0" />
+          </div>
 
           {/* Experience Cards */}
           <div className="space-y-12">
@@ -250,8 +354,11 @@ const ExperienceSection: React.FC = () => {
                     isLeft ? "md:flex-row" : "md:flex-row-reverse"
                   } flex-col md:gap-8`}
                 >
-                  {/* Timeline Dot */}
-                  <div className="timeline-dot absolute left-8 md:left-1/2 w-6 h-6 bg-white dark:bg-gray-800 border-4 border-marrsgreen dark:border-carrigreen rounded-full transform md:-translate-x-1/2 z-10 shadow-lg" />
+                  {/* Timeline Dot with Pulse */}
+                  <div className="timeline-dot absolute left-8 md:left-1/2 w-6 h-6 bg-white dark:bg-gray-800 border-4 border-marrsgreen dark:border-carrigreen rounded-full transform md:-translate-x-1/2 z-10 shadow-lg">
+                    {/* Inner glow */}
+                    <div className="absolute inset-0 rounded-full bg-marrsgreen dark:bg-carrigreen opacity-20 animate-pulse" />
+                  </div>
 
                   {/* Spacer for desktop */}
                   <div className="hidden md:block md:w-1/2" />
@@ -262,14 +369,14 @@ const ExperienceSection: React.FC = () => {
                       isLeft ? "md:pr-12" : "md:pl-12"
                     }`}
                   >
-                    <div className="group relative bg-white dark:bg-[#1B2731] rounded-2xl p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-gray-800 transform-gpu">
-                      {/* Gradient glow on hover */}
-                      <div className={`absolute inset-0 bg-gradient-to-br ${exp.gradient} opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-500 blur-xl`} />
+                    <div className="card-content group relative bg-white dark:bg-[#1B2731] rounded-2xl p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-gray-800 transform-gpu" style={{ transformStyle: "preserve-3d" }}>
+                      {/* Animated gradient glow on hover */}
+                      <div className={`card-glow absolute inset-0 bg-gradient-to-br ${exp.gradient} opacity-0 rounded-2xl blur-2xl pointer-events-none`} />
 
                       {/* Company Badge */}
-                      <div className="flex items-center gap-4 mb-4">
+                      <div className="relative z-10 flex items-center gap-4 mb-4">
                         <div
-                          className={`w-14 h-14 rounded-xl bg-gradient-to-br ${exp.gradient} flex items-center justify-center text-3xl shadow-lg group-hover:scale-110 group-hover:rotate-12 transition-all duration-500`}
+                          className={`company-icon w-14 h-14 rounded-xl bg-gradient-to-br ${exp.gradient} flex items-center justify-center text-3xl shadow-lg group-hover:scale-110 group-hover:rotate-12 transition-all duration-500`}
                         >
                           {exp.icon}
                         </div>
@@ -298,11 +405,11 @@ const ExperienceSection: React.FC = () => {
                       </div>
 
                       {/* Achievements */}
-                      <ul className="space-y-2 mb-6">
+                      <ul className="relative z-10 space-y-2 mb-6">
                         {exp.achievements.map((achievement, idx) => (
                           <li
                             key={idx}
-                            className="flex items-start gap-2 text-sm md:text-base text-gray-700 dark:text-gray-300"
+                            className="achievement-item flex items-start gap-2 text-sm md:text-base text-gray-700 dark:text-gray-300 hover:text-marrsgreen dark:hover:text-carrigreen transition-colors duration-300 cursor-default"
                           >
                             <span className="text-marrsgreen dark:text-carrigreen mt-1 flex-shrink-0">
                               ▸
@@ -313,11 +420,11 @@ const ExperienceSection: React.FC = () => {
                       </ul>
 
                       {/* Tech Stack */}
-                      <div className="flex flex-wrap gap-2">
+                      <div className="relative z-10 flex flex-wrap gap-2">
                         {exp.techStack.map((tech, idx) => (
                           <span
                             key={tech}
-                            className="tech-badge px-3 py-1 bg-gradient-to-r from-gray-100 to-gray-50 dark:from-gray-800 dark:to-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-xs font-medium border border-gray-200 dark:border-gray-600 hover:border-marrsgreen dark:hover:border-carrigreen hover:scale-110 transition-all duration-300 cursor-default"
+                            className="tech-badge px-3 py-1 bg-gradient-to-r from-gray-100 to-gray-50 dark:from-gray-800 dark:to-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-xs font-medium border border-gray-200 dark:border-gray-600 hover:border-marrsgreen dark:hover:border-carrigreen hover:scale-110 hover:shadow-lg transition-all duration-300 cursor-default"
                           >
                             {tech}
                           </span>
@@ -325,7 +432,7 @@ const ExperienceSection: React.FC = () => {
                       </div>
 
                       {/* Bottom accent line */}
-                      <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${exp.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700 rounded-b-2xl`} />
+                      <div className={`absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r ${exp.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700 rounded-b-2xl shadow-lg`} />
                     </div>
                   </div>
                 </div>
