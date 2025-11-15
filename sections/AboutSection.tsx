@@ -100,28 +100,50 @@ const AboutSection: React.FC = () => {
             className="relative"
           >
             <motion.div
-              className="bg-gradient-to-br from-marrsgreen to-teal-600 dark:from-carrigreen dark:to-teal-500 rounded-3xl p-8 md:p-10 text-white shadow-2xl relative overflow-hidden group"
+              className="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-500 dark:via-purple-500 dark:to-pink-500 rounded-3xl p-8 md:p-10 text-white shadow-2xl relative overflow-hidden group"
               whileHover={{ scale: 1.02, rotate: -1 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              {/* Animated particles */}
+              {/* Animated mesh gradient overlay */}
+              <div className="absolute inset-0 opacity-30">
+                <motion.div
+                  className="absolute inset-0"
+                  style={{
+                    background: "radial-gradient(circle at 20% 50%, rgba(255,255,255,0.2) 0%, transparent 50%)",
+                  }}
+                  animate={{
+                    background: [
+                      "radial-gradient(circle at 20% 50%, rgba(255,255,255,0.2) 0%, transparent 50%)",
+                      "radial-gradient(circle at 80% 50%, rgba(255,255,255,0.2) 0%, transparent 50%)",
+                      "radial-gradient(circle at 50% 80%, rgba(255,255,255,0.2) 0%, transparent 50%)",
+                      "radial-gradient(circle at 50% 20%, rgba(255,255,255,0.2) 0%, transparent 50%)",
+                      "radial-gradient(circle at 20% 50%, rgba(255,255,255,0.2) 0%, transparent 50%)",
+                    ],
+                  }}
+                  transition={{ duration: 10, repeat: Infinity }}
+                />
+              </div>
+
+              {/* Floating orbs */}
               <div className="absolute inset-0">
-                {[...Array(20)].map((_, i) => (
+                {[...Array(8)].map((_, i) => (
                   <motion.div
                     key={i}
-                    className="absolute w-1 h-1 bg-white rounded-full"
+                    className="absolute w-3 h-3 bg-white/40 rounded-full blur-sm"
                     style={{
-                      left: `${Math.random() * 100}%`,
-                      top: `${Math.random() * 100}%`,
+                      left: `${15 + i * 12}%`,
+                      top: `${20 + (i % 3) * 25}%`,
                     }}
                     animate={{
-                      y: [0, -30, 0],
-                      opacity: [0, 1, 0],
+                      y: [0, -20, 0],
+                      x: [0, 10, 0],
+                      scale: [1, 1.2, 1],
+                      opacity: [0.4, 0.8, 0.4],
                     }}
                     transition={{
-                      duration: 3,
+                      duration: 3 + i * 0.5,
                       repeat: Infinity,
-                      delay: i * 0.2,
+                      delay: i * 0.3,
                     }}
                   />
                 ))}
@@ -143,13 +165,13 @@ const AboutSection: React.FC = () => {
 
                 <div className="grid grid-cols-3 gap-4">
                   {[
-                    { value: "2+", label: "Years", icon: "🚀" },
-                    { value: "20+", label: "Projects", icon: "💡" },
-                    { value: "16+", label: "Tech", icon: "⚡" },
+                    { value: "2+", label: "Years" },
+                    { value: "20+", label: "Projects" },
+                    { value: "16+", label: "Tech" },
                   ].map((stat, i) => (
                     <motion.div
                       key={stat.label}
-                      className="text-center"
+                      className="text-center relative"
                       initial={{ opacity: 0, scale: 0 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
@@ -159,12 +181,53 @@ const AboutSection: React.FC = () => {
                         stiffness: 200,
                       }}
                     >
-                      <motion.div
-                        className="text-3xl mb-1"
-                        animate={{ rotate: [0, 10, -10, 0] }}
-                        transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
-                      >
-                        {stat.icon}
+                      {/* Animated point/dot */}
+                      <motion.div className="flex justify-center mb-3">
+                        <div className="relative w-12 h-12 flex items-center justify-center">
+                          {/* Outer ring */}
+                          <motion.div
+                            className="absolute w-12 h-12 rounded-full border-2 border-white/30"
+                            animate={{
+                              scale: [1, 1.3, 1],
+                              opacity: [0.3, 0.6, 0.3],
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                              delay: i * 0.3,
+                            }}
+                          />
+                          {/* Middle ring */}
+                          <motion.div
+                            className="absolute w-8 h-8 rounded-full border-2 border-white/50"
+                            animate={{
+                              scale: [1, 1.2, 1],
+                              rotate: [0, 180, 360],
+                            }}
+                            transition={{
+                              duration: 3,
+                              repeat: Infinity,
+                              delay: i * 0.3,
+                            }}
+                          />
+                          {/* Inner dot */}
+                          <motion.div
+                            className="absolute w-4 h-4 rounded-full bg-white shadow-lg"
+                            animate={{
+                              scale: [1, 1.1, 1],
+                              boxShadow: [
+                                "0 0 10px rgba(255,255,255,0.5)",
+                                "0 0 20px rgba(255,255,255,0.8)",
+                                "0 0 10px rgba(255,255,255,0.5)",
+                              ],
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                              delay: i * 0.3,
+                            }}
+                          />
+                        </div>
                       </motion.div>
                       <div className="text-3xl font-bold">{stat.value}</div>
                       <div className="text-sm text-white/80">{stat.label}</div>
@@ -173,7 +236,7 @@ const AboutSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Corner decoration */}
+              {/* Corner decorations */}
               <motion.div
                 className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"
                 animate={{
@@ -181,6 +244,14 @@ const AboutSection: React.FC = () => {
                   opacity: [0.3, 0.5, 0.3],
                 }}
                 transition={{ duration: 4, repeat: Infinity }}
+              />
+              <motion.div
+                className="absolute -top-10 -left-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"
+                animate={{
+                  scale: [1, 1.3, 1],
+                  opacity: [0.2, 0.4, 0.2],
+                }}
+                transition={{ duration: 5, repeat: Infinity }}
               />
             </motion.div>
           </motion.div>
