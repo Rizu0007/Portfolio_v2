@@ -148,17 +148,19 @@ const Myskills = () => {
         card,
         {
           opacity: 0,
-          scale: 0.8,
-          y: 30,
+          scale: 0.5,
+          y: 50,
+          rotation: -10,
         },
         {
           opacity: 1,
           scale: 1,
           y: 0,
-          duration: 0.6,
-          ease: "back.out(1.5)",
+          rotation: 0,
+          duration: 0.8,
+          ease: "elastic.out(1, 0.6)",
         },
-        `-=${index === 0 ? 0.5 : 0.55}`
+        `-=${index === 0 ? 0.4 : 0.7}`
       );
     });
 
@@ -173,6 +175,32 @@ const Myskills = () => {
         delay: index * 0.1,
       });
     });
+
+    // Animate stats cards
+    const statCards = q(".stat-card");
+    gsap.fromTo(
+      statCards,
+      {
+        opacity: 0,
+        scale: 0.5,
+        y: 40,
+        rotation: 5,
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        rotation: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "elastic.out(1, 0.7)",
+        scrollTrigger: {
+          trigger: ".stat-card",
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
 
     // Cleanup
     return () => {
@@ -230,7 +258,15 @@ const Myskills = () => {
               className="skill-card relative group cursor-pointer"
             >
               {/* Card Container */}
-              <div className="relative h-full p-4 md:p-5 rounded-2xl bg-white dark:bg-[#1B2731] shadow-xl hover:shadow-2xl border border-gray-100 dark:border-gray-800 overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1">
+              <div className="relative h-full p-3 md:p-4 rounded-3xl bg-white dark:bg-[#1B2731] shadow-lg hover:shadow-2xl border-2 border-gray-100 dark:border-gray-800 hover:border-transparent overflow-hidden transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:rotate-1">
+
+                {/* Animated gradient border on hover */}
+                <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${skill.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm`} />
+
+                {/* Shimmer effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
+                </div>
 
                 {/* Animated gradient glow effect */}
                 <div className="glow-effect absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -253,17 +289,17 @@ const Myskills = () => {
                 </div>
 
                 {/* Icon */}
-                <div className="relative z-10 flex flex-col items-center justify-center h-full gap-3">
+                <div className="relative z-10 flex flex-col items-center justify-center h-full gap-2">
                   <div
-                    className={`w-12 h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-br ${skill.gradient} flex items-center justify-center shadow-2xl ${skill.shadow} group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}
+                    className={`w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-gradient-to-br ${skill.gradient} flex items-center justify-center shadow-2xl ${skill.shadow} group-hover:scale-125 group-hover:rotate-12 transition-all duration-500`}
                   >
-                    <span className="text-2xl md:text-3xl font-bold text-white">
+                    <span className="text-xl md:text-2xl font-bold text-white group-hover:scale-110 transition-transform duration-300">
                       {skill.icon}
                     </span>
                   </div>
 
                   {/* Skill name */}
-                  <h3 className="text-sm md:text-base font-bold text-gray-900 dark:text-white text-center group-hover:scale-110 transition-transform duration-300">
+                  <h3 className="text-xs md:text-sm font-bold text-gray-900 dark:text-white text-center group-hover:scale-105 transition-transform duration-300">
                     {skill.name}
                   </h3>
 
@@ -294,19 +330,27 @@ const Myskills = () => {
           ].map((stat, index) => (
             <div
               key={stat.label}
-              className="stat-card relative text-center p-4 md:p-5 rounded-2xl bg-white dark:bg-[#1B2731] shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 border border-gray-100 dark:border-gray-800 group cursor-pointer overflow-hidden isolate"
+              className="stat-card relative text-center p-3 md:p-4 rounded-3xl bg-white dark:bg-[#1B2731] shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 hover:rotate-2 border-2 border-gray-100 dark:border-gray-800 hover:border-transparent group cursor-pointer overflow-hidden"
             >
+              {/* Animated gradient border on hover */}
+              <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm`} />
+
+              {/* Shimmer effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
+              </div>
+
               {/* Background gradient pulse */}
               <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
 
               <div className="relative z-10">
-                <div className="text-4xl mb-3 transform group-hover:scale-125 group-hover:rotate-12 transition-all duration-500">
+                <div className="text-3xl md:text-4xl mb-2 transform group-hover:scale-125 group-hover:rotate-12 transition-all duration-500">
                   {stat.icon}
                 </div>
-                <div className={`text-3xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2`}>
+                <div className={`text-2xl md:text-3xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-1`}>
                   {stat.value}
                 </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+                <div className="text-xs md:text-sm text-gray-600 dark:text-gray-400 font-medium">
                   {stat.label}
                 </div>
               </div>
