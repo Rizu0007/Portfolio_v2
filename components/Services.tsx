@@ -195,32 +195,6 @@ const Myskills = () => {
       });
     });
 
-    // Animate stats cards
-    const statCards = q(".stat-card");
-    gsap.fromTo(
-      statCards,
-      {
-        opacity: 0,
-        scale: 0.5,
-        y: 40,
-        rotation: 5,
-      },
-      {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        rotation: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "elastic.out(1, 0.7)",
-        scrollTrigger: {
-          trigger: ".stat-card",
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-
     // Cleanup
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
@@ -312,44 +286,6 @@ const Myskills = () => {
               </div>
             );
           })}
-        </div>
-
-        {/* Stats Section with Advanced Animations */}
-        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6">
-          {[
-            { label: "Projects", value: "20+", icon: "🚀", color: "from-blue-500 to-cyan-500" },
-            { label: "Technologies", value: "15+", icon: "⚡", color: "from-purple-500 to-pink-500" },
-            { label: "Experience", value: "2+ Yrs", icon: "💼", color: "from-green-500 to-emerald-500" },
-            { label: "Lines of Code", value: "100K+", icon: "💻", color: "from-orange-500 to-red-500" },
-          ].map((stat, index) => (
-            <div
-              key={stat.label}
-              className="stat-card relative text-center p-3 md:p-4 rounded-3xl bg-white dark:bg-[#1B2731] shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 hover:rotate-2 border-2 border-gray-100 dark:border-gray-800 hover:border-transparent group cursor-pointer overflow-hidden"
-            >
-              {/* Animated gradient border on hover */}
-              <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm`} />
-
-              {/* Shimmer effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
-              </div>
-
-              {/* Background gradient pulse */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
-
-              <div className="relative z-10">
-                <div className="text-3xl md:text-4xl mb-2 transform group-hover:scale-125 group-hover:rotate-12 transition-all duration-500">
-                  {stat.icon}
-                </div>
-                <div className={`text-2xl md:text-3xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-1`}>
-                  {stat.value}
-                </div>
-                <div className="text-xs md:text-sm text-gray-600 dark:text-gray-400 font-medium">
-                  {stat.label}
-                </div>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
 
