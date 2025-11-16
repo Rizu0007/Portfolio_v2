@@ -340,8 +340,7 @@ const Myskills = () => {
                 </div>
 
                 {/* Skill name below the circle */}
-                <h3 className="mt-3 md:mt-4 text-xs md:text-sm font-bold text-gray-900 dark:text-white text-center group-hover:scale-110 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text transition-all duration-300"
-                    style={{ backgroundImage: `linear-gradient(to right, var(--tw-gradient-stops))` }}>
+                <h3 className="mt-3 md:mt-4 text-xs md:text-sm font-bold text-gray-900 dark:text-white text-center group-hover:scale-110 transition-all duration-300">
                   {skill.name}
                 </h3>
               </div>
