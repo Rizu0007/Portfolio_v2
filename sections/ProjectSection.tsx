@@ -96,7 +96,28 @@ const ProjectSection: React.FC = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="projects" className="section">
+    <section ref={sectionRef} id="projects" className="section relative overflow-hidden">
+      {/* Background animated text */}
+      <span
+        aria-hidden="true"
+        className="absolute top-10 left-0 right-0 text-center rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+      >
+        INNOVATIVE SOLUTIONS
+      </span>
+      <span
+        aria-hidden="true"
+        className="absolute top-96 left-0 right-0 text-center -rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+      >
+        SCALABLE APPLICATIONS
+      </span>
+      <span
+        aria-hidden="true"
+        className="absolute bottom-40 left-0 right-0 text-center rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+      >
+        RAG CHATBOT FINTECH BLOCKCHAIN
+      </span>
+
+      <div className="relative z-10">
       <div className="project-title text-center">
         <RoughNotation
           type="underline"
@@ -126,6 +147,7 @@ const ProjectSection: React.FC = () => {
           my github profile
         </a>
       </div>
+      </div>
     </section>
   );
 };
@@ -141,7 +163,7 @@ const projects = [
     ),
     desc: "Leading development of an AI-powered RAG chatbot platform using LangChain orchestration. Built ETL pipeline for web crawling, hybrid search with Qdrant vector database, and MCP integrations with Shopify, Contentful, WooCommerce. Reduced response latency by 35% with contextual compression and multi-query generation.",
     tags: ["LangChain", "Qdrant", "OpenAI", "MCP", "Next.js"],
-    liveUrl: "#",
+    liveUrl: "https://app.xeko.ai/",
     codeUrl: "#",
     bgColor: "bg-[#9D84B7]",
   },
@@ -155,7 +177,7 @@ const projects = [
     ),
     desc: "High-performance stock market platform with portfolio management and real-time market tracking. Engineered with Next.js, Nest.js, PostgreSQL. Implemented advanced caching strategies achieving 60% faster response times and 98% uptime. Built responsive dashboards with trend analysis capabilities.",
     tags: ["Next.js", "Nest.js", "PostgreSQL", "WebSockets"],
-    liveUrl: "#",
+    liveUrl: "https://app.upinvest.pk/",
     codeUrl: "#",
     bgColor: "bg-[#7FB3D5]",
   },

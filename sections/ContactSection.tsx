@@ -135,8 +135,29 @@ const ContactSection: React.FC = () => {
     <section
       ref={sectionRef}
       id="contact"
-      className="section min-h-[700px] text-center"
+      className="section min-h-[700px] text-center relative overflow-hidden"
     >
+      {/* Background animated text */}
+      <span
+        aria-hidden="true"
+        className="absolute top-10 left-0 right-0 text-center rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+      >
+        LET'S CONNECT COLLABORATE
+      </span>
+      <span
+        aria-hidden="true"
+        className="absolute top-60 left-0 right-0 text-center -rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+      >
+        HIRE ME GET IN TOUCH
+      </span>
+      <span
+        aria-hidden="true"
+        className="absolute bottom-20 left-0 right-0 text-center rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+      >
+        BUILD SOMETHING AMAZING
+      </span>
+
+      <div className="relative z-10">
       <div className="text-center contact-wrapper">
         <RoughNotation
           type="underline"
@@ -168,6 +189,7 @@ const ContactSection: React.FC = () => {
             Get in touch!
           </LinkButton>
         </div>
+      </div>
       </div>
     </section>
   );

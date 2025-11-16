@@ -1,5 +1,4 @@
-My portfolio & blog website developed with Next.JS(SSG) and TypeScript. Tailwind CSS and GSAP is used for styling and animations. Blog contents are written in Markdown format. Light & Dark themes supported.
-
+My portfolio & blog website developed with Next.JS(SSG) and TypeScript. Tailwind CSS and GSAP is used for styling and animations. 
 ## Features
 
 - Responsive Design 📱💻
