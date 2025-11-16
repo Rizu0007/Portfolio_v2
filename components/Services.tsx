@@ -261,7 +261,7 @@ const Myskills = () => {
             return (
               <div
                 key={skill.name}
-                className="skill-card relative group cursor-pointer"
+                className="skill-card relative group cursor-pointer flex flex-col items-center gap-3"
               >
                 {/* Circular Card Container */}
                 <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full bg-white dark:bg-[#1B2731] shadow-xl hover:shadow-2xl border-2 border-gray-100 dark:border-gray-800 overflow-hidden transition-all duration-500 hover:scale-110">
@@ -281,14 +281,12 @@ const Myskills = () => {
                       <IconComponent className="inline-block" />
                     </div>
                   </div>
-
-                  {/* Tooltip - Skill name on hover */}
-                  <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
-                    <div className="whitespace-nowrap px-3 py-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs font-semibold rounded-lg shadow-lg">
-                      {skill.name}
-                    </div>
-                  </div>
                 </div>
+
+                {/* Skill name - always visible */}
+                <span className="text-xs md:text-sm font-semibold text-gray-700 dark:text-gray-300 text-center transition-colors duration-300 group-hover:text-gray-900 dark:group-hover:text-white">
+                  {skill.name}
+                </span>
               </div>
             );
           })}
