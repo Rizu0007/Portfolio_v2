@@ -277,9 +277,7 @@ const Myskills = () => {
 
                   {/* Icon centered */}
                   <div className="relative z-10 flex items-center justify-center w-full h-full">
-                    <div className={`text-3xl md:text-4xl transition-all duration-500 group-hover:scale-110 bg-gradient-to-br ${skill.gradient} bg-clip-text text-transparent`}>
-                      <IconComponent className="inline-block" />
-                    </div>
+                    <IconComponent className="text-3xl md:text-4xl transition-all duration-500 group-hover:scale-110 text-gray-700 dark:text-gray-200 group-hover:text-gray-900 dark:group-hover:text-white" />
                   </div>
                 </div>
 
