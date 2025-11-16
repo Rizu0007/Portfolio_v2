@@ -270,80 +270,45 @@ const Myskills = () => {
         </div>
 
 
-        {/* Modern Skills Grid - No Progress Bars */}
+        {/* Modern Skills Grid - Circular Badges */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-10">
-          {skillsData.map((skill, index) => (
-            <div
-              key={skill.name}
-              className="skill-card relative group cursor-pointer"
-            >
-              {/* Card Container */}
-              <div className="relative h-full p-3 md:p-4 rounded-3xl bg-white dark:bg-[#1B2731] shadow-lg hover:shadow-2xl border-2 border-gray-100 dark:border-gray-800 hover:border-transparent overflow-hidden transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:rotate-1">
+          {skillsData.map((skill, index) => {
+            const IconComponent = skill.Icon;
+            return (
+              <div
+                key={skill.name}
+                className="skill-card relative group cursor-pointer"
+              >
+                {/* Card Container */}
+                <div className="relative h-full p-3 md:p-4 rounded-3xl bg-white dark:bg-[#1B2731] shadow-lg hover:shadow-2xl border-2 border-gray-100 dark:border-gray-800 hover:border-transparent overflow-hidden transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:rotate-1">
 
-                {/* Animated gradient border on hover */}
-                <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${skill.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm`} />
+                  {/* Animated gradient border on hover */}
+                  <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${skill.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm`} />
 
-                {/* Shimmer effect */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
-                </div>
-
-                {/* Animated gradient glow effect */}
-                <div className="glow-effect absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className={`absolute inset-0 bg-gradient-to-br ${skill.gradient} opacity-20 blur-2xl`} />
-                </div>
-
-                {/* Floating particles effect */}
-                <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                  {[...Array(3)].map((_, i) => (
-                    <div
-                      key={i}
-                      className={`absolute w-2 h-2 rounded-full bg-gradient-to-r ${skill.gradient} opacity-0 group-hover:opacity-60 transition-opacity duration-700`}
-                      style={{
-                        top: `${20 + i * 30}%`,
-                        left: `${10 + i * 20}%`,
-                        animation: `float ${3 + i}s ease-in-out infinite ${i * 0.5}s`,
-                      }}
-                    />
-                  ))}
-                </div>
-
-                {/* Icon */}
-                <div className="relative z-10 flex flex-col items-center justify-center h-full gap-2">
-                  <div
-                    className={`w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-gradient-to-br ${skill.gradient} flex items-center justify-center shadow-2xl ${skill.shadow} group-hover:scale-125 group-hover:rotate-12 transition-all duration-500`}
-                  >
-                    <span className="text-xl md:text-2xl font-bold text-white group-hover:scale-110 transition-transform duration-300">
-                      {skill.icon}
-                    </span>
+                  {/* Shimmer effect */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
                   </div>
 
-                  {/* Skill name */}
-                  <h3 className="text-xs md:text-sm font-bold text-gray-900 dark:text-white text-center group-hover:scale-105 transition-transform duration-300">
-                    {skill.name}
-                  </h3>
+                  {/* Animated gradient glow effect */}
+                  <div className="glow-effect absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div className={`absolute inset-0 bg-gradient-to-br ${skill.gradient} opacity-20 blur-2xl`} />
+                  </div>
 
                   {/* Icon with official logo */}
-                  <div className="relative z-10 flex items-center justify-center">
+                  <div className="relative z-10 flex flex-col items-center justify-center h-full gap-2">
                     <div
-                      className={`w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full bg-gradient-to-br ${skill.gradient} flex items-center justify-center shadow-xl ${skill.shadow} group-hover:rotate-12 transition-all duration-500 transform-gpu`}
-                      style={{ transformStyle: "preserve-3d" }}
+                      className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br ${skill.gradient} flex items-center justify-center shadow-2xl ${skill.shadow} group-hover:scale-125 group-hover:rotate-12 transition-all duration-500`}
                     >
-                      <IconComponent className="text-white text-2xl md:text-3xl" />
+                      <IconComponent className="text-white text-xl md:text-2xl" />
                     </div>
-                  </div>
 
-                  {/* Rotating border accent */}
-                  <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${skill.gradient} opacity-20 blur-md animate-pulse`} />
+                    {/* Skill name */}
+                    <h3 className="text-xs md:text-sm font-bold text-gray-900 dark:text-white text-center group-hover:scale-105 transition-transform duration-300">
+                      {skill.name}
+                    </h3>
                   </div>
                 </div>
-
-                {/* Skill name below the circle */}
-                <h3 className="mt-3 md:mt-4 text-xs md:text-sm font-bold text-gray-900 dark:text-white text-center group-hover:scale-110 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text transition-all duration-300"
-                    style={{ backgroundImage: `linear-gradient(to right, var(--tw-gradient-stops))` }}>
-                  {skill.name}
-                </h3>
               </div>
             );
           })}
