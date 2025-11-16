@@ -35,164 +35,89 @@ const ContactSection: React.FC = () => {
 
     const q = gsap.utils.selector(sectionRef);
 
-    // Main timeline for contact section entrance
+    // Clean entrance timeline
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: "top 75%",
+        start: "top 80%",
         toggleActions: "play none none reverse",
       },
     });
 
-    // Modern entrance animations with rotation
+    // Simple fade-up animations
     tl.fromTo(
       q(".contact-wrapper"),
-      { opacity: 0, y: 60, scale: 0.9 },
+      { opacity: 0, y: 40 },
       {
         opacity: 1,
         y: 0,
-        scale: 1,
-        duration: 0.8,
-        ease: "power4.out",
+        duration: 0.6,
+        ease: "power2.out",
       }
     )
     .fromTo(
       headingRef.current,
-      { opacity: 0, y: 40, rotationX: -15 },
-      {
-        opacity: 1,
-        y: 0,
-        rotationX: 0,
-        duration: 0.8,
-        ease: "back.out(1.5)",
-      },
-      "-=0.5"
-    )
-    .fromTo(
-      descRef.current,
       { opacity: 0, y: 30 },
       {
         opacity: 1,
         y: 0,
-        duration: 0.7,
-        ease: "power3.out",
+        duration: 0.6,
+        ease: "power2.out",
       },
-      "-=0.5"
+      "-=0.4"
     )
     .fromTo(
-      q(".contact-card"),
-      { opacity: 0, y: 50, rotationY: -20, scale: 0.8 },
+      descRef.current,
+      { opacity: 0, y: 20 },
       {
         opacity: 1,
         y: 0,
-        rotationY: 0,
-        scale: 1,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "back.out(1.7)",
+        duration: 0.5,
+        ease: "power2.out",
       },
       "-=0.4"
+    )
+    .fromTo(
+      q(".contact-card"),
+      { opacity: 0, y: 30, scale: 0.95 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: "power2.out",
+      },
+      "-=0.3"
     )
     .fromTo(
       buttonRef.current,
-      { opacity: 0, scale: 0.5, rotationZ: -10 },
+      { opacity: 0, y: 20 },
       {
         opacity: 1,
-        scale: 1,
-        rotationZ: 0,
-        duration: 0.7,
-        ease: "elastic.out(1, 0.6)",
+        y: 0,
+        duration: 0.5,
+        ease: "power2.out",
       },
-      "-=0.5"
+      "-=0.3"
     )
     .fromTo(
       q(".social-link"),
-      { opacity: 0, scale: 0, rotation: -45 },
+      { opacity: 0, scale: 0.8 },
       {
         opacity: 1,
         scale: 1,
-        rotation: 0,
-        stagger: 0.08,
-        duration: 0.6,
-        ease: "back.out(2)",
+        stagger: 0.05,
+        duration: 0.4,
+        ease: "back.out(1.5)",
       },
-      "-=0.4"
+      "-=0.2"
     );
 
-    // Floating animation for contact cards
-    const cards = q(".contact-card");
-    cards.forEach((card: HTMLElement, index: number) => {
-      gsap.to(card, {
-        y: index % 2 === 0 ? -10 : -7,
-        duration: 2.5 + index * 0.2,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        delay: index * 0.2,
-      });
-
-      gsap.to(card, {
-        rotationZ: index % 2 === 0 ? 1 : -1,
-        duration: 3 + index * 0.3,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        delay: index * 0.15,
-      });
-    });
-
-    // Floating animation for social links
-    const socialLinks = q(".social-link");
-    socialLinks.forEach((link: HTMLElement, index: number) => {
-      gsap.to(link, {
-        y: -5,
-        duration: 2 + index * 0.15,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        delay: index * 0.1,
-      });
-    });
-
-    // Enhanced magnetic button effect
-    const button = buttonRef.current?.querySelector("a");
-
-    if (button) {
-      const handleMouseMove = (e: MouseEvent) => {
-        const { left, top, width, height } = button.getBoundingClientRect();
-        const centerX = left + width / 2;
-        const centerY = top + height / 2;
-
-        const deltaX = (e.clientX - centerX) * 0.2;
-        const deltaY = (e.clientY - centerY) * 0.2;
-
-        gsap.to(button, {
-          x: deltaX,
-          y: deltaY,
-          duration: 0.4,
-          ease: "power2.out",
-        });
-      };
-
-      const handleMouseLeave = () => {
-        gsap.to(button, {
-          x: 0,
-          y: 0,
-          duration: 0.6,
-          ease: "elastic.out(1, 0.4)",
-        });
-      };
-
-      button.addEventListener("mousemove", handleMouseMove);
-      button.addEventListener("mouseleave", handleMouseLeave);
-
-      // Cleanup
-      return () => {
-        button.removeEventListener("mousemove", handleMouseMove);
-        button.removeEventListener("mouseleave", handleMouseLeave);
-        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-      };
-    }
+    // Cleanup
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
   }, []);
 
   return (
@@ -220,25 +145,6 @@ const ContactSection: React.FC = () => {
       >
         BUILD SOMETHING AMAZING
       </span>
-
-      {/* Floating orbs */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        {[...Array(6)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-32 h-32 rounded-full blur-3xl opacity-20"
-            style={{
-              background: `radial-gradient(circle, ${
-                i % 3 === 0 ? '#00b4d8' : i % 3 === 1 ? '#9d4edd' : '#06ffa5'
-              }, transparent)`,
-              left: `${10 + i * 15}%`,
-              top: `${20 + (i % 3) * 25}%`,
-              animation: `float ${4 + i}s ease-in-out infinite`,
-              animationDelay: `${i * 0.5}s`,
-            }}
-          />
-        ))}
-      </div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-4">
         {/* Contact Title */}
@@ -288,11 +194,10 @@ const ContactSection: React.FC = () => {
           {/* Email Card */}
           <a
             href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}
-            className="contact-card group relative transform-gpu cursor-pointer rounded-2xl overflow-hidden bg-white dark:bg-[#1B2731] shadow-xl hover:shadow-2xl border-2 border-gray-100 dark:border-gray-800 p-6 transition-all duration-500 hover:scale-105 hover:border-blue-500 dark:hover:border-blue-400"
+            className="contact-card group relative cursor-pointer rounded-2xl bg-white dark:bg-[#1B2731] shadow-lg hover:shadow-xl border border-gray-200 dark:border-gray-700 p-6 transition-all duration-300 hover:border-blue-500 dark:hover:border-blue-400"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
-            <div className="relative z-10 flex flex-col items-center gap-4">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+            <div className="flex flex-col items-center gap-4">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-md transition-transform duration-300 group-hover:scale-110">
                 <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
@@ -309,11 +214,10 @@ const ContactSection: React.FC = () => {
             href="https://www.linkedin.com/in/rizwan-ahmad-87135a262/"
             target="_blank"
             rel="noreferrer"
-            className="contact-card group relative transform-gpu cursor-pointer rounded-2xl overflow-hidden bg-white dark:bg-[#1B2731] shadow-xl hover:shadow-2xl border-2 border-gray-100 dark:border-gray-800 p-6 transition-all duration-500 hover:scale-105 hover:border-blue-600 dark:hover:border-blue-500"
+            className="contact-card group relative cursor-pointer rounded-2xl bg-white dark:bg-[#1B2731] shadow-lg hover:shadow-xl border border-gray-200 dark:border-gray-700 p-6 transition-all duration-300 hover:border-blue-600 dark:hover:border-blue-500"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-400 opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
-            <div className="relative z-10 flex flex-col items-center gap-4">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+            <div className="flex flex-col items-center gap-4">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center shadow-md transition-transform duration-300 group-hover:scale-110">
                 <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                 </svg>
@@ -330,11 +234,10 @@ const ContactSection: React.FC = () => {
             href="https://github.com/Rizu0007"
             target="_blank"
             rel="noreferrer"
-            className="contact-card group relative transform-gpu cursor-pointer rounded-2xl overflow-hidden bg-white dark:bg-[#1B2731] shadow-xl hover:shadow-2xl border-2 border-gray-100 dark:border-gray-800 p-6 transition-all duration-500 hover:scale-105 hover:border-gray-900 dark:hover:border-gray-300"
+            className="contact-card group relative cursor-pointer rounded-2xl bg-white dark:bg-[#1B2731] shadow-lg hover:shadow-xl border border-gray-200 dark:border-gray-700 p-6 transition-all duration-300 hover:border-gray-900 dark:hover:border-gray-300"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-600 opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
-            <div className="relative z-10 flex flex-col items-center gap-4">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-gray-800 to-gray-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+            <div className="flex flex-col items-center gap-4">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-gray-800 to-gray-600 flex items-center justify-center shadow-md transition-transform duration-300 group-hover:scale-110">
                 <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974 0 4.406 2.857 8.145 6.821 9.465.499.09.679-.217.679-.481 0-.237-.008-.865-.011-1.696-2.775.602-3.361-1.338-3.361-1.338-.452-1.152-1.107-1.459-1.107-1.459-.905-.619.069-.605.069-.605 1.002.07 1.527 1.028 1.527 1.028.89 1.524 2.336 1.084 2.902.829.091-.645.351-1.085.635-1.334-2.214-.251-4.542-1.107-4.542-4.93 0-1.087.389-1.979 1.024-2.675-.101-.253-.446-1.268.099-2.64 0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336 9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021.545 1.372.203 2.387.099 2.64.64.696 1.024 1.587 1.024 2.675 0 3.833-2.33 4.675-4.552 4.922.355.308.675.916.675 1.846 0 1.334-.012 2.41-.012 2.737 0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974 22 6.465 17.535 2 12.026 2z"/>
                 </svg>
@@ -381,17 +284,6 @@ const ContactSection: React.FC = () => {
           ))}
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0) translateX(0);
-          }
-          50% {
-            transform: translateY(-20px) translateX(10px);
-          }
-        }
-      `}</style>
     </section>
   );
 };
