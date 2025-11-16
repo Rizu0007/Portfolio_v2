@@ -23,13 +23,13 @@ const ProjectCard: React.FC<Props> = ({ index, project }) => {
 
   const even = index % 2 === 0 ? true : false;
 
-  // Entrance animations
+  // Clean entrance animations
   useEffect(() => {
     const q = gsap.utils.selector(sectionRef);
 
     gsap.registerPlugin(ScrollTrigger);
 
-    // Modern entrance animation - cards slide from alternating sides
+    // Simple, clean entrance animation
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
@@ -38,100 +38,73 @@ const ProjectCard: React.FC<Props> = ({ index, project }) => {
       },
     });
 
-    // Card entrance - dramatic slide from side with rotation
+    // Card slides up smoothly
     tl.fromTo(
       cardRef.current,
       {
         opacity: 0,
-        x: even ? -100 : 100,
-        y: 50,
-        scale: 0.85,
-        rotation: even ? -5 : 5,
+        y: 60,
+        scale: 0.95,
       },
       {
         opacity: 1,
-        x: 0,
         y: 0,
         scale: 1,
-        rotation: 0,
-        duration: 0.9,
-        ease: "power4.out",
+        duration: 0.7,
+        ease: "power3.out",
       }
     );
 
-    // Image zooms in with fade
+    // Image fades in
     tl.fromTo(
       q(".project-image"),
-      { opacity: 0, scale: 1.3 },
+      { opacity: 0 },
       {
         opacity: 1,
-        scale: 1,
-        ease: "power3.out",
-        duration: 0.8,
-      },
-      "-=0.6"
-    );
-
-    // Title slides from opposite side
-    tl.fromTo(
-      q(".project-text"),
-      { x: even ? 40 : -40, opacity: 0 },
-      {
-        x: 0,
-        opacity: 1,
-        duration: 0.6,
-        ease: "power3.out",
+        duration: 0.5,
+        ease: "power2.out",
       },
       "-=0.5"
     );
 
-    // Description fades in with slight slide
+    // Content fades in with slight stagger
     tl.fromTo(
-      q(".project-desc"),
-      { opacity: 0, y: 15 },
+      q(".project-text"),
+      { opacity: 0, y: 10 },
       {
         opacity: 1,
         y: 0,
-        duration: 0.5,
+        duration: 0.4,
         ease: "power2.out",
-      },
-      "-=0.4"
-    );
-
-    // Tags appear with smooth stagger
-    tl.fromTo(
-      q(".project-tags"),
-      { y: 10, opacity: 0, scale: 0.9 },
-      {
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        stagger: 0.04,
-        ease: "back.out(1.5)",
-        duration: 0.6,
       },
       "-=0.3"
     );
 
-    // Continuous floating animation after entrance
-    gsap.to(cardRef.current, {
-      y: index % 2 === 0 ? -8 : -5,
-      duration: 2.5 + (index % 3) * 0.3,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut",
-      delay: 0.5,
-    });
+    tl.fromTo(
+      q(".project-desc"),
+      { opacity: 0, y: 10 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.4,
+        ease: "power2.out",
+      },
+      "-=0.2"
+    );
 
-    // Subtle continuous rotation
-    gsap.to(cardRef.current, {
-      rotation: index % 2 === 0 ? 0.5 : -0.5,
-      duration: 4 + (index % 3) * 0.5,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut",
-      delay: 0.7,
-    });
+    // Tags fade in with subtle stagger
+    tl.fromTo(
+      q(".project-tags"),
+      { opacity: 0, y: 5 },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.03,
+        duration: 0.4,
+        ease: "power2.out",
+      },
+      "-=0.2"
+    );
 
     // Cleanup
     return () => {
@@ -143,103 +116,50 @@ const ProjectCard: React.FC<Props> = ({ index, project }) => {
     };
   }, [even, index]);
 
-  // Enhanced 3D Tilt + Magnetic effect on hover
+  // Simple, clean hover effect
   useEffect(() => {
     const card = cardRef.current;
     const image = imageRef.current;
 
     if (!card || !image) return;
 
-    let floatingTween: gsap.core.Tween | null = null;
-    let rotationTween: gsap.core.Tween | null = null;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const { left, top, width, height } = card.getBoundingClientRect();
-      const x = (e.clientX - left) / width;
-      const y = (e.clientY - top) / height;
-
-      // Calculate rotation values (-12 to 12 degrees)
-      const rotateY = (x - 0.5) * 12;
-      const rotateX = (y - 0.5) * -12;
-
-      // Tilt the entire card
-      gsap.to(card, {
-        rotationY: rotateY,
-        rotationX: rotateX,
-        transformPerspective: 1200,
-        duration: 0.6,
-        ease: "power2.out",
-      });
-
-      // Image zooms and shifts for parallax depth
-      gsap.to(image, {
-        x: (x - 0.5) * 15,
-        y: (y - 0.5) * 15,
-        scale: 1.05,
-        duration: 0.6,
-        ease: "power2.out",
-      });
-
-      // Update cursor spotlight position
-      const spotlight = card.querySelector('.cursor-spotlight') as HTMLElement;
-      if (spotlight) {
-        spotlight.style.background = `radial-gradient(circle 300px at ${x * 100}% ${y * 100}%, rgba(255,255,255,0.15), transparent)`;
-      }
-
-      // Update shine effect position
-      const shine = image.querySelector('.shine-effect') as HTMLElement;
-      if (shine) {
-        shine.style.background = `linear-gradient(${Math.atan2(y - 0.5, x - 0.5) * (180 / Math.PI) + 90}deg, transparent 40%, rgba(255,255,255,0.3) 50%, transparent 60%)`;
-      }
-    };
-
     const handleMouseEnter = () => {
-      // Pause floating animations
-      floatingTween = gsap.getTweensOf(card).find(t => (t.vars as any).y !== undefined) as gsap.core.Tween || null;
-      rotationTween = gsap.getTweensOf(card).find(t => (t.vars as any).rotation !== undefined) as gsap.core.Tween || null;
-
-      floatingTween?.pause();
-      rotationTween?.pause();
-
-      // Enhanced hover with lift
+      // Simple lift effect
       gsap.to(card, {
-        scale: 1.03,
-        z: 50,
+        y: -8,
+        scale: 1.02,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+
+      // Subtle image zoom
+      gsap.to(image, {
+        scale: 1.05,
         duration: 0.4,
         ease: "power2.out",
       });
     };
 
     const handleMouseLeave = () => {
-      // Resume floating animations
-      floatingTween?.resume();
-      rotationTween?.resume();
-
-      // Smooth return to original state
+      // Return to normal
       gsap.to(card, {
-        rotationY: 0,
-        rotationX: 0,
+        y: 0,
         scale: 1,
-        z: 0,
-        duration: 0.6,
+        duration: 0.3,
         ease: "power2.out",
       });
 
       gsap.to(image, {
-        x: 0,
-        y: 0,
         scale: 1,
-        duration: 0.6,
+        duration: 0.4,
         ease: "power2.out",
       });
     };
 
-    card.addEventListener("mousemove", handleMouseMove);
     card.addEventListener("mouseenter", handleMouseEnter);
     card.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
-      card.removeEventListener("mousemove", handleMouseMove);
       card.removeEventListener("mouseenter", handleMouseEnter);
       card.removeEventListener("mouseleave", handleMouseLeave);
     };
@@ -249,44 +169,32 @@ const ProjectCard: React.FC<Props> = ({ index, project }) => {
     <div ref={sectionRef} className="md:basis-1/2 md:px-8 py-2 md:py-4">
       <div
         ref={cardRef}
-        className="project-card group relative transform-gpu cursor-pointer rounded-2xl overflow-hidden bg-white dark:bg-[#1B2731] shadow-2xl hover:shadow-3xl transition-all duration-500 border border-gray-100 dark:border-gray-800"
-        style={{ transformStyle: "preserve-3d" }}
+        className="project-card group relative cursor-pointer rounded-2xl overflow-hidden bg-white dark:bg-[#1B2731] shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-gray-200 dark:border-gray-700"
       >
-        {/* Cursor spotlight effect */}
-        <div className="cursor-spotlight absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-20" />
-
-        {/* Gradient glow overlay on hover */}
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none z-10">
-          <div className={`absolute inset-0 bg-gradient-to-br ${project.bgColor.replace('bg-', 'from-')} to-transparent blur-2xl`} />
-        </div>
-
-        <div className="relative overflow-hidden rounded-t-2xl">
+        <div className="relative overflow-hidden">
           <div
             ref={imageRef}
             className={`project-image ${project.bgColor} relative aspect-[16/9] overflow-hidden`}
           >
             {project.image}
 
-            {/* Shine/glare effect */}
-            <div className="shine-effect absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-            {/* Gradient overlay on image */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            {/* Subtle gradient overlay on image */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
 
             {/* Project type badge */}
-            <div className="absolute top-4 left-4 z-30">
-              <span className="px-3 py-1.5 bg-white/90 dark:bg-black/80 backdrop-blur-sm text-xs font-bold rounded-full border-2 border-white/50 dark:border-white/20 text-gray-800 dark:text-white shadow-lg">
+            <div className="absolute top-4 left-4 z-10">
+              <span className="px-3 py-1.5 bg-white/95 dark:bg-black/85 backdrop-blur-sm text-xs font-bold rounded-full border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-white shadow-md">
                 {project.type}
               </span>
             </div>
           </div>
 
           {/* Gradient accent line */}
-          <div className={`h-1 bg-gradient-to-r ${project.bgColor.replace('bg-', 'from-')} via-purple-500 to-pink-500`} />
+          <div className={`h-1 bg-gradient-to-r ${project.bgColor.replace('bg-', 'from-')} to-purple-500`} />
         </div>
         <div className="overflow-hidden p-4 relative z-20">
           <div className="project-text flex items-center justify-between mb-3">
-            <h3 className="text-marrsgreen dark:text-carrigreen text-lg font-bold group-hover:scale-105 transition-transform duration-300">
+            <h3 className="text-marrsgreen dark:text-carrigreen text-lg font-bold">
               {project.title}
             </h3>
             <div className="flex items-center gap-2">
@@ -345,12 +253,9 @@ const ProjectCard: React.FC<Props> = ({ index, project }) => {
             {project.tags.map((tag, idx) => (
               <li
                 key={tag}
-                className={`project-tags relative overflow-hidden py-1.5 px-3 rounded-full text-xs font-semibold border-2 transition-all duration-300 hover:scale-110 hover:shadow-lg cursor-default bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-600 hover:from-opacity-10 hover:border-marrsgreen dark:hover:border-carrigreen`}
-                style={{ transitionDelay: `${idx * 20}ms` }}
+                className="project-tags py-1.5 px-3 rounded-full text-xs font-semibold border border-gray-300 dark:border-gray-600 transition-colors duration-200 cursor-default bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:border-marrsgreen dark:hover:border-carrigreen hover:bg-gray-100 dark:hover:bg-gray-700"
               >
-                {/* Tag shine effect on hover */}
-                <div className={`absolute inset-0 opacity-0 hover:opacity-10 bg-gradient-to-br ${project.bgColor.replace('bg-', 'from-')} to-purple-500 transition-opacity duration-300`} />
-                <span className="relative z-10">{tag}</span>
+                {tag}
               </li>
             ))}
           </ul>
