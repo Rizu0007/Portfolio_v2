@@ -1,96 +1,114 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import {
+  SiReact,
+  SiNextdotjs,
+  SiTypescript,
+  SiTailwindcss,
+  SiNodedotjs,
+  SiNestjs,
+  SiExpress,
+  SiMongodb,
+  SiPostgresql,
+  SiChainlink,
+  SiGraphql,
+  SiAmazonaws,
+  SiSocketdotio,
+  SiChartdotjs,
+  SiGithub,
+  SiSolidity
+} from "react-icons/si";
 
-// Skills data with modern badge design
+// Skills data with official logos
 const skillsData = [
   {
     name: "React.js",
-    icon: "⚛️",
+    Icon: SiReact,
     gradient: "from-blue-500 via-cyan-500 to-blue-400",
     shadow: "shadow-blue-500/50",
   },
   {
     name: "Next.js",
-    icon: "▲",
+    Icon: SiNextdotjs,
     gradient: "from-gray-800 via-gray-600 to-gray-800",
     shadow: "shadow-gray-500/50",
   },
   {
     name: "TypeScript",
-    icon: "TS",
+    Icon: SiTypescript,
     gradient: "from-blue-600 via-blue-500 to-blue-400",
     shadow: "shadow-blue-500/50",
   },
   {
     name: "Tailwind CSS",
-    icon: "🎨",
+    Icon: SiTailwindcss,
     gradient: "from-cyan-500 via-teal-400 to-cyan-600",
     shadow: "shadow-cyan-500/50",
   },
   {
     name: "Node.js",
-    icon: "📦",
+    Icon: SiNodedotjs,
     gradient: "from-green-600 via-green-500 to-emerald-500",
     shadow: "shadow-green-500/50",
   },
   {
     name: "Nest.js",
-    icon: "🐈",
+    Icon: SiNestjs,
     gradient: "from-red-500 via-pink-500 to-red-600",
     shadow: "shadow-red-500/50",
   },
   {
     name: "Express.js",
-    icon: "⚡",
+    Icon: SiExpress,
     gradient: "from-gray-700 via-gray-600 to-gray-500",
     shadow: "shadow-gray-500/50",
   },
   {
     name: "MongoDB",
-    icon: "🍃",
+    Icon: SiMongodb,
     gradient: "from-green-500 via-emerald-500 to-green-600",
     shadow: "shadow-green-500/50",
   },
   {
     name: "PostgreSQL",
-    icon: "🐘",
+    Icon: SiPostgresql,
     gradient: "from-blue-700 via-blue-600 to-blue-500",
     shadow: "shadow-blue-600/50",
   },
   {
     name: "LangChain",
-    icon: "🔗",
+    Icon: SiChainlink,
     gradient: "from-yellow-500 via-orange-500 to-yellow-600",
     shadow: "shadow-yellow-500/50",
   },
   {
     name: "GraphQL",
-    icon: "◆",
+    Icon: SiGraphql,
     gradient: "from-pink-600 via-purple-500 to-pink-500",
     shadow: "shadow-pink-500/50",
   },
   {
     name: "AWS",
-    icon: "☁️",
+    Icon: SiAmazonaws,
     gradient: "from-orange-600 via-yellow-500 to-orange-500",
     shadow: "shadow-orange-500/50",
   },
   {
     name: "WebSockets",
-    icon: "🔌",
+    Icon: SiSocketdotio,
     gradient: "from-purple-500 via-pink-500 to-purple-600",
     shadow: "shadow-purple-500/50",
   },
   {
     name: "Chart.js",
-    icon: "📊",
+    Icon: SiChartdotjs,
     gradient: "from-teal-500 via-cyan-500 to-teal-600",
     shadow: "shadow-teal-500/50",
   },
   {
     name: "Git & GitHub",
-    icon: "🔥",
+    Icon: SiGithub,
     gradient: "from-orange-500 via-red-500 to-orange-600",
     shadow: "shadow-orange-500/50",
   },
@@ -164,15 +182,16 @@ const Myskills = () => {
       );
     });
 
-    // Continuous floating animation for all cards
+    // Enhanced continuous floating animation for all cards
     skillCards.forEach((card: HTMLElement, index: number) => {
       gsap.to(card, {
+
         y: "+=6",
         duration: 2 + index * 0.1,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
-        delay: index * 0.1,
+        delay: (index % 4) * 0.3,
       });
     });
 
@@ -250,6 +269,7 @@ const Myskills = () => {
           </p>
         </div>
 
+
         {/* Modern Skills Grid - No Progress Bars */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-10">
           {skillsData.map((skill, index) => (
@@ -303,21 +323,30 @@ const Myskills = () => {
                     {skill.name}
                   </h3>
 
-                  {/* Animated underline */}
-                  <div className={`h-1 w-0 group-hover:w-full bg-gradient-to-r ${skill.gradient} rounded-full transition-all duration-500`} />
+                  {/* Icon with official logo */}
+                  <div className="relative z-10 flex items-center justify-center">
+                    <div
+                      className={`w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full bg-gradient-to-br ${skill.gradient} flex items-center justify-center shadow-xl ${skill.shadow} group-hover:rotate-12 transition-all duration-500 transform-gpu`}
+                      style={{ transformStyle: "preserve-3d" }}
+                    >
+                      <IconComponent className="text-white text-2xl md:text-3xl" />
+                    </div>
+                  </div>
+
+                  {/* Rotating border accent */}
+                  <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${skill.gradient} opacity-20 blur-md animate-pulse`} />
+                  </div>
                 </div>
 
-                {/* Corner accent */}
-                <div className="absolute top-0 right-0 w-20 h-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className={`absolute top-2 right-2 w-3 h-3 rounded-full bg-gradient-to-br ${skill.gradient} animate-ping`} />
-                  <div className={`absolute top-2 right-2 w-3 h-3 rounded-full bg-gradient-to-br ${skill.gradient}`} />
-                </div>
-
-                {/* Bottom shine effect */}
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent dark:via-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
+                {/* Skill name below the circle */}
+                <h3 className="mt-3 md:mt-4 text-xs md:text-sm font-bold text-gray-900 dark:text-white text-center group-hover:scale-110 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text transition-all duration-300"
+                    style={{ backgroundImage: `linear-gradient(to right, var(--tw-gradient-stops))` }}>
+                  {skill.name}
+                </h3>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Stats Section with Advanced Animations */}
