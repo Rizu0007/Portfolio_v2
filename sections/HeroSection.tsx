@@ -21,7 +21,7 @@ const HeroSection: React.FC = () => {
     });
   };
 
-  const sectionRef = useRef(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const q = gsap.utils.selector(sectionRef);
 
   useEffect(() => {
