@@ -23,62 +23,58 @@ const ProjectCard: React.FC<Props> = ({ index, project }) => {
 
   const even = index % 2 === 0 ? true : false;
 
-  // Modern reveal animation
+  // Clean, consistent reveal animation
   useEffect(() => {
     const q = gsap.utils.selector(sectionRef);
 
     gsap.registerPlugin(ScrollTrigger);
 
-    // Smooth reveal timeline
+    // Smooth entrance with subtle stagger
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: "top 85%",
+        start: "top 80%",
         toggleActions: "play none none reverse",
       },
     });
 
-    // Card reveals from side with fade and subtle rotation
+    // Card fades up with subtle scale
     tl.fromTo(
       cardRef.current,
       {
         opacity: 0,
-        x: even ? -80 : 80,
-        rotateY: even ? -8 : 8,
-        scale: 0.9,
+        y: 50,
+        scale: 0.95,
       },
       {
         opacity: 1,
-        x: 0,
-        rotateY: 0,
+        y: 0,
         scale: 1,
-        duration: 0.8,
-        ease: "power2.out",
+        duration: 0.6,
+        ease: "power3.out",
       }
     );
 
-    // Image container with parallax-style reveal
+    // Image fades in smoothly
     tl.fromTo(
       q(".project-image"),
       {
         opacity: 0,
-        scale: 1.2,
       },
       {
         opacity: 1,
-        scale: 1,
-        duration: 0.6,
+        duration: 0.5,
         ease: "power2.out",
       },
-      "-=0.6"
+      "-=0.4"
     );
 
-    // Content slides in smoothly
+    // Content appears with subtle slide
     tl.fromTo(
       q(".project-content"),
       {
         opacity: 0,
-        y: 20,
+        y: 15,
       },
       {
         opacity: 1,
@@ -86,21 +82,21 @@ const ProjectCard: React.FC<Props> = ({ index, project }) => {
         duration: 0.5,
         ease: "power2.out",
       },
-      "-=0.4"
+      "-=0.3"
     );
 
-    // Tags appear with stagger
+    // Tags pop in with stagger
     tl.fromTo(
       q(".project-tags"),
-      { opacity: 0, scale: 0.8 },
+      { opacity: 0, scale: 0.9 },
       {
         opacity: 1,
         scale: 1,
-        stagger: 0.05,
+        stagger: 0.04,
         duration: 0.3,
-        ease: "back.out(1.5)",
+        ease: "back.out(1.4)",
       },
-      "-=0.3"
+      "-=0.2"
     );
 
     // Cleanup
@@ -111,66 +107,53 @@ const ProjectCard: React.FC<Props> = ({ index, project }) => {
         }
       });
     };
-  }, [even, index]);
+  }, [index]);
 
-  // Smooth parallax hover effect
+  // Clean hover effect with lift and image zoom
   useEffect(() => {
     const card = cardRef.current;
     const image = imageRef.current;
 
     if (!card || !image) return;
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-
-      const rotateX = (y - centerY) / 20;
-      const rotateY = (centerX - x) / 20;
-
+    const handleMouseEnter = () => {
+      // Lift card with subtle scale
       gsap.to(card, {
-        rotationX: rotateX,
-        rotationY: rotateY,
-        transformPerspective: 1000,
-        duration: 0.5,
+        y: -12,
+        scale: 1.02,
+        duration: 0.4,
         ease: "power2.out",
       });
 
-      // Parallax image movement
+      // Zoom image
       gsap.to(image, {
-        x: (x - centerX) / 30,
-        y: (y - centerY) / 30,
-        scale: 1.05,
-        duration: 0.5,
+        scale: 1.08,
+        duration: 0.6,
         ease: "power2.out",
       });
     };
 
     const handleMouseLeave = () => {
+      // Return to original state
       gsap.to(card, {
-        rotationX: 0,
-        rotationY: 0,
-        duration: 0.5,
+        y: 0,
+        scale: 1,
+        duration: 0.4,
         ease: "power2.out",
       });
 
       gsap.to(image, {
-        x: 0,
-        y: 0,
         scale: 1,
-        duration: 0.5,
+        duration: 0.6,
         ease: "power2.out",
       });
     };
 
-    card.addEventListener("mousemove", handleMouseMove);
+    card.addEventListener("mouseenter", handleMouseEnter);
     card.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
-      card.removeEventListener("mousemove", handleMouseMove);
+      card.removeEventListener("mouseenter", handleMouseEnter);
       card.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, []);
@@ -179,8 +162,7 @@ const ProjectCard: React.FC<Props> = ({ index, project }) => {
     <div ref={sectionRef} className="md:basis-1/2 md:px-8 py-2 md:py-4">
       <div
         ref={cardRef}
-        className="project-card group relative cursor-pointer rounded-2xl overflow-hidden bg-white dark:bg-[#1B2731] shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-gray-200 dark:border-gray-700"
-        style={{ transformStyle: "preserve-3d" }}
+        className="project-card group relative cursor-pointer rounded-2xl overflow-hidden bg-white dark:bg-[#1B2731] shadow-lg hover:shadow-2xl transition-shadow duration-400 border border-gray-200 dark:border-gray-700"
       >
         <div className="relative overflow-hidden">
           <div
