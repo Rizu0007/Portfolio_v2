@@ -184,14 +184,24 @@ const Myskills = () => {
 
     // Enhanced continuous floating animation for all cards
     skillCards.forEach((card: HTMLElement, index: number) => {
+      // Floating Y animation
       gsap.to(card, {
-
-        y: "+=6",
-        duration: 2 + index * 0.1,
+        y: index % 2 === 0 ? -12 : -8,
+        duration: 2 + (index % 5) * 0.2,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
-        delay: (index % 4) * 0.3,
+        delay: (index % 6) * 0.2,
+      });
+
+      // Subtle rotation animation
+      gsap.to(card, {
+        rotation: index % 2 === 0 ? 3 : -3,
+        duration: 3 + (index % 4) * 0.3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: (index % 5) * 0.25,
       });
     });
 
@@ -244,8 +254,8 @@ const Myskills = () => {
         </div>
 
 
-        {/* Modern Skills Grid - Circular Badges */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-10">
+        {/* Modern Skills Grid - Circular Floating Badges */}
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-6 md:gap-8 lg:gap-10 justify-items-center">
           {skillsData.map((skill, index) => {
             const IconComponent = skill.Icon;
             return (
@@ -253,34 +263,30 @@ const Myskills = () => {
                 key={skill.name}
                 className="skill-card relative group cursor-pointer"
               >
-                {/* Card Container */}
-                <div className="relative h-full p-3 md:p-4 rounded-3xl bg-white dark:bg-[#1B2731] shadow-lg hover:shadow-2xl border-2 border-gray-100 dark:border-gray-800 hover:border-transparent overflow-hidden transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:rotate-1">
+                {/* Circular Card Container */}
+                <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full bg-white dark:bg-[#1B2731] shadow-xl hover:shadow-2xl border-2 border-gray-100 dark:border-gray-800 overflow-hidden transition-all duration-500 hover:scale-110">
 
-                  {/* Animated gradient border on hover */}
-                  <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${skill.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm`} />
+                  {/* Subtle always-on gradient glow */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${skill.gradient} opacity-5`} />
 
-                  {/* Shimmer effect */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
-                  </div>
+                  {/* Animated gradient glow on hover */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${skill.gradient} opacity-0 group-hover:opacity-20 transition-opacity duration-500`} />
 
-                  {/* Animated gradient glow effect */}
-                  <div className="glow-effect absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className={`absolute inset-0 bg-gradient-to-br ${skill.gradient} opacity-20 blur-2xl`} />
-                  </div>
+                  {/* Gradient border on hover */}
+                  <div className={`absolute -inset-1 rounded-full bg-gradient-to-br ${skill.gradient} opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-500 -z-10`} />
 
-                  {/* Icon with official logo */}
-                  <div className="relative z-10 flex flex-col items-center justify-center h-full gap-2">
-                    <div
-                      className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br ${skill.gradient} flex items-center justify-center shadow-2xl ${skill.shadow} group-hover:scale-125 group-hover:rotate-12 transition-all duration-500`}
-                    >
-                      <IconComponent className="text-white text-xl md:text-2xl" />
+                  {/* Icon centered */}
+                  <div className="relative z-10 flex items-center justify-center w-full h-full">
+                    <div className={`text-3xl md:text-4xl transition-all duration-500 group-hover:scale-110 bg-gradient-to-br ${skill.gradient} bg-clip-text text-transparent`}>
+                      <IconComponent className="inline-block" />
                     </div>
+                  </div>
 
-                    {/* Skill name */}
-                    <h3 className="text-xs md:text-sm font-bold text-gray-900 dark:text-white text-center group-hover:scale-105 transition-transform duration-300">
+                  {/* Tooltip - Skill name on hover */}
+                  <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+                    <div className="whitespace-nowrap px-3 py-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs font-semibold rounded-lg shadow-lg">
                       {skill.name}
-                    </h3>
+                    </div>
                   </div>
                 </div>
               </div>
