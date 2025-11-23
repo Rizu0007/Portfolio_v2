@@ -19,17 +19,17 @@
 
   /* Track */
   ::-webkit-scrollbar-track {
-    @apply bg-bglight dark:bg-bgdark;
+    @apply bg-bgdark;
   }
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    @apply bg-[#d5d5d5] dark:bg-carddark;
+    @apply bg-carddark;
   }
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-[#b7b7b7] dark:bg-[#17222b];
+    @apply bg-[#17222b];
   }
 }
 
@@ -41,10 +41,10 @@
     @apply text-2xl md:text-3xl xl:text-4xl inline-block my-6 font-medium;
   }
   .link-outline {
-    @apply outline-marrsgreen dark:outline-carrigreen;
+    @apply outline-carrigreen;
   }
   .link {
-    @apply outline-marrsgreen dark:outline-carrigreen text-marrsdark hover:text-marrsgreen dark:text-carrilight dark:hover:text-carrigreen;
+    @apply outline-carrigreen text-carrilight hover:text-carrigreen;
   }
   .blog-main {
     @apply mb-20 mt-16 min-h-[70vh];
@@ -53,10 +53,10 @@
     @apply py-8 px-4 sm:px-8 md:px-20 max-w-4xl mx-auto;
   }
   .glassmorphism {
-    @apply bg-clip-padding backdrop-filter backdrop-blur-xl !bg-opacity-50 dark:!bg-opacity-60;
+    @apply bg-clip-padding backdrop-filter backdrop-blur-xl !bg-opacity-60;
   }
   .lower-glassmorphism {
-    @apply !bg-opacity-50 dark:!bg-opacity-60 after:!backdrop-blur-xl after:w-full after:h-full after:absolute after:top-0 after:left-0 after:-z-10;
+    @apply !bg-opacity-60 after:!backdrop-blur-xl after:w-full after:h-full after:absolute after:top-0 after:left-0 after:-z-10;
   }
 }
 
@@ -72,22 +72,15 @@
 }
 
 .swiper-pagination-bullet {
-  @apply dark:bg-gray-200;
-}
-.dark .swiper-pagination-bullet-active {
-  background-color: rgb(5 206 145) !important;
+  @apply bg-gray-200;
 }
 .swiper-pagination-bullet-active {
-  background-color: rgb(0 140 140) !important;
+  background-color: rgb(5 206 145) !important;
 }
 
 .swiper-button-prev,
 .swiper-button-next {
-  @apply dark:text-carrigreen;
-}
-.swiper-button-prev,
-.swiper-button-next {
-  color: rgb(0 140 140) !important;
+  color: rgb(5 206 145) !important;
 }
 @media only screen and (max-width: 480px) {
   .swiper-button-prev,

@@ -37,14 +37,14 @@ const Blog: NextPage<Props> = ({ posts, tag }) => {
   return (
     <>
       <AppHead title="Blog - Sat Naing" />
-      <div ref={sectionRef} className="bg-bglight dark:bg-bgdark">
-        <div className="selection:bg-marrsgreen selection:text-bglight dark:selection:bg-carrigreen dark:selection:text-bgdark">
+      <div ref={sectionRef} className="bg-bgdark">
+        <div className="selection:bg-carrigreen selection:text-bgdark">
           <SkipToMain />
           <BlogHeader />
           <SocialLinks />
           <main id="main" className="blog-main">
             <section className="blog-section">
-              <h1 className="overflow-hidden py-1 text-2xl md:text-3xl lg:text-4xl font-medium md:font-bold mb-0 md:mb-8 pl-2 md:pl-4 border-l-8 border-marrsgreen dark:border-carrigreen">
+              <h1 className="overflow-hidden py-1 text-2xl md:text-3xl lg:text-4xl font-medium md:font-bold mb-0 md:mb-8 pl-2 md:pl-4 border-l-8 border-carrigreen">
                 <span className="tag-title block">Tag: {tag}</span>
               </h1>
               <ul>

@@ -320,19 +320,19 @@ const ExperienceSection: React.FC = () => {
       {/* Background animated text */}
       <span
         aria-hidden="true"
-        className="absolute top-10 left-0 right-0 text-center rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+        className="absolute top-10 left-0 right-0 text-center rotate-12 text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
       >
         GRANDEUR DIGITAL DOST
       </span>
       <span
         aria-hidden="true"
-        className="absolute top-96 left-0 right-0 text-center -rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+        className="absolute top-96 left-0 right-0 text-center -rotate-12 text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
       >
         XEKO.AI UPINVEST MYARBIT
       </span>
       <span
         aria-hidden="true"
-        className="absolute bottom-20 left-0 right-0 text-center rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+        className="absolute bottom-20 left-0 right-0 text-center rotate-12 text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
       >
         SYNTAX SOFTWARE HOUSE
       </span>
@@ -342,12 +342,12 @@ const ExperienceSection: React.FC = () => {
         <div className="text-center mb-20">
           <h2
             ref={headingRef}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-marrsgreen via-teal-500 to-carrigreen dark:from-carrigreen dark:via-teal-400 dark:to-marrsgreen bg-clip-text text-transparent"
+            className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-carrigreen via-teal-400 to-marrsgreen bg-clip-text text-transparent"
             style={{ transformStyle: "preserve-3d" }}
           >
             Work Experience
           </h2>
-          <p className="subtitle text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+          <p className="subtitle text-lg md:text-xl text-gray-400 max-w-3xl mx-auto">
             Building innovative solutions across AI, fintech, and e-commerce
           </p>
         </div>
@@ -358,9 +358,9 @@ const ExperienceSection: React.FC = () => {
           <div className="absolute left-8 md:left-1/2 top-0 bottom-0 transform md:-translate-x-1/2">
             <div
               ref={timelineRef}
-              className="w-1 h-full bg-gradient-to-b from-marrsgreen via-teal-500 to-carrigreen dark:from-carrigreen dark:via-teal-400 dark:to-marrsgreen"
+              className="w-1 h-full bg-gradient-to-b from-carrigreen via-teal-400 to-marrsgreen"
             />
-            <div className="timeline-glow absolute inset-0 w-1 bg-gradient-to-b from-marrsgreen via-teal-500 to-carrigreen dark:from-carrigreen dark:via-teal-400 dark:to-marrsgreen blur-md opacity-0" />
+            <div className="timeline-glow absolute inset-0 w-1 bg-gradient-to-b from-carrigreen via-teal-400 to-marrsgreen blur-md opacity-0" />
           </div>
 
           {/* Experience Cards */}
@@ -375,9 +375,9 @@ const ExperienceSection: React.FC = () => {
                   } flex-col md:gap-8`}
                 >
                   {/* Timeline Dot with Pulse */}
-                  <div className="timeline-dot absolute left-8 md:left-1/2 w-6 h-6 bg-white dark:bg-gray-800 border-4 border-marrsgreen dark:border-carrigreen rounded-full transform md:-translate-x-1/2 z-10 shadow-lg">
+                  <div className="timeline-dot absolute left-8 md:left-1/2 w-6 h-6 bg-gray-800 border-4 border-carrigreen rounded-full transform md:-translate-x-1/2 z-10 shadow-lg">
                     {/* Inner glow */}
-                    <div className="absolute inset-0 rounded-full bg-marrsgreen dark:bg-carrigreen opacity-20 animate-pulse" />
+                    <div className="absolute inset-0 rounded-full bg-carrigreen opacity-20 animate-pulse" />
                   </div>
 
                   {/* Spacer for desktop */}
@@ -389,7 +389,7 @@ const ExperienceSection: React.FC = () => {
                       isLeft ? "md:pr-12" : "md:pl-12"
                     }`}
                   >
-                    <div className="card-content group relative bg-white dark:bg-[#1B2731] rounded-2xl p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-gray-800 transform-gpu" style={{ transformStyle: "preserve-3d" }}>
+                    <div className="card-content group relative bg-[#1B2731] rounded-2xl p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-800 transform-gpu" style={{ transformStyle: "preserve-3d" }}>
                       {/* Animated gradient glow on hover */}
                       <div className={`card-glow absolute inset-0 bg-gradient-to-br ${exp.gradient} opacity-0 rounded-2xl blur-2xl pointer-events-none`} />
 
@@ -401,10 +401,10 @@ const ExperienceSection: React.FC = () => {
                           {exp.icon}
                         </div>
                         <div className="flex-1">
-                          <h3 className="text-2xl font-bold text-gray-900 dark:text-white group-hover:text-marrsgreen dark:group-hover:text-carrigreen transition-colors">
+                          <h3 className="text-2xl font-bold text-white group-hover:text-carrigreen transition-colors">
                             {exp.company}
                           </h3>
-                          <p className="text-sm text-gray-500 dark:text-gray-400">
+                          <p className="text-sm text-gray-400">
                             {exp.location}
                           </p>
                         </div>
@@ -412,13 +412,13 @@ const ExperienceSection: React.FC = () => {
 
                       {/* Role & Duration */}
                       <div className="mb-4">
-                        <h4 className="text-xl font-bold bg-gradient-to-r from-marrsgreen to-teal-600 dark:from-carrigreen dark:to-teal-400 bg-clip-text text-transparent mb-1">
+                        <h4 className="text-xl font-bold bg-gradient-to-r from-carrigreen to-teal-400 bg-clip-text text-transparent mb-1">
                           {exp.role}
                         </h4>
-                        <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                        <div className="flex items-center gap-2 text-sm text-gray-400">
                           <span>📅</span>
                           <span>{exp.duration}</span>
-                          <span className="ml-2 px-2 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 rounded text-xs font-medium">
+                          <span className="ml-2 px-2 py-1 bg-amber-900/30 text-amber-400 rounded text-xs font-medium">
                             {exp.type}
                           </span>
                         </div>
@@ -429,9 +429,9 @@ const ExperienceSection: React.FC = () => {
                         {exp.achievements.map((achievement, idx) => (
                           <li
                             key={idx}
-                            className="achievement-item flex items-start gap-2 text-sm md:text-base text-gray-700 dark:text-gray-300 hover:text-marrsgreen dark:hover:text-carrigreen transition-colors duration-300 cursor-default"
+                            className="achievement-item flex items-start gap-2 text-sm md:text-base text-gray-300 hover:text-carrigreen transition-colors duration-300 cursor-default"
                           >
-                            <span className="text-marrsgreen dark:text-carrigreen mt-1 flex-shrink-0">
+                            <span className="text-carrigreen mt-1 flex-shrink-0">
                               ▸
                             </span>
                             <span>{achievement}</span>
@@ -444,7 +444,7 @@ const ExperienceSection: React.FC = () => {
                         {exp.techStack.map((tech, idx) => (
                           <span
                             key={tech}
-                            className="tech-badge px-3 py-1 bg-gradient-to-r from-gray-100 to-gray-50 dark:from-gray-800 dark:to-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-xs font-medium border border-gray-200 dark:border-gray-600 hover:border-marrsgreen dark:hover:border-carrigreen hover:scale-110 hover:shadow-lg transition-all duration-300 cursor-default"
+                            className="tech-badge px-3 py-1 bg-gradient-to-r from-gray-800 to-gray-700 text-gray-300 rounded-full text-xs font-medium border border-gray-600 hover:border-carrigreen hover:scale-110 hover:shadow-lg transition-all duration-300 cursor-default"
                           >
                             {tech}
                           </span>
