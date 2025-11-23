@@ -12,11 +12,11 @@ const Tag: React.FC<Props> = ({ tag, size = "sm", count }) => {
       href={`/blog/tags/${tag}`}
       key={tag}
       passHref
-      className={`blog-tag link-outline group whitespace-nowrap dark:fill-bglight hover:bg-marrsgreen hover:text-bglight hover:fill-bglight dark:hover:bg-carrigreen dark:hover:text-bgdark dark:hover:fill-bgdark ${
+      className={`blog-tag link-outline group whitespace-nowrap fill-bglight hover:bg-carrigreen hover:text-bgdark hover:fill-bgdark ${
         size === "lg"
           ? "py-2 px-3 text-base mr-4 my-2"
           : "py-1 px-2 text-xs mr-2 my-1"
-      } bg-gray-300 dark:bg-carddark rounded inline-block shadow hover:shadow-md cursor-pointer`}
+      } bg-carddark rounded inline-block shadow hover:shadow-md cursor-pointer`}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +33,7 @@ const Tag: React.FC<Props> = ({ tag, size = "sm", count }) => {
       {count && (
         <span
           aria-label={`: ${count} article${count > 1 ? "s" : ""}`}
-          className="ml-2 inline-block bg-marrslight dark:bg-carrilight group-hover:bg-marrsdark dark:group-hover:bg-carridark dark:text-bgdark text-sm p-1 min-w-[1.75rem] text-center rounded-full"
+          className="ml-2 inline-block bg-carrilight group-hover:bg-carridark text-bgdark text-sm p-1 min-w-[1.75rem] text-center rounded-full"
         >
           {count}
         </span>

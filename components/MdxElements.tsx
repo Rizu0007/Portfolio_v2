@@ -28,14 +28,14 @@ export const Hr = (props: any) => (
 
 export const Ul = (props: any) => (
   <ul
-    className="marker:text-marrsgreen dark:marker:text-carrigreen list-disc pl-4 space-y-1 mt-1"
+    className="marker:text-carrigreen list-disc pl-4 space-y-1 mt-1"
     {...props}
   />
 );
 
 export const Ol = (props: any) => (
   <ol
-    className="marker:text-marrsgreen dark:marker:text-carrigreen list-decimal pl-4 space-y-1 mt-1"
+    className="marker:text-carrigreen list-decimal pl-4 space-y-1 mt-1"
     {...props}
   />
 );
@@ -45,7 +45,7 @@ export const P = (props: any) => <p className="my-3" {...props} />;
 export const Blockquote = (props: any) => (
   <>
     <blockquote
-      className="py-[2px] my-4 font-medium px-4 border-l-8 border-marrslight dark:border-carrilight italic bg-cardlight dark:bg-carddark"
+      className="py-[2px] my-4 font-medium px-4 border-l-8 border-carrilight italic bg-carddark"
       {...props}
     ></blockquote>
   </>

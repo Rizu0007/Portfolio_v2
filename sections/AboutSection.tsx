@@ -45,19 +45,19 @@ const AboutSection: React.FC = () => {
       {/* Background animated text */}
       <span
         aria-hidden="true"
-        className="absolute top-20 left-0 right-0 text-center rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+        className="absolute top-20 left-0 right-0 text-center rotate-12 text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
       >
         PASSIONATE CREATIVE INNOVATIVE
       </span>
       <span
         aria-hidden="true"
-        className="absolute top-60 left-0 right-0 text-center -rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+        className="absolute top-60 left-0 right-0 text-center -rotate-12 text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
       >
         DEVELOPER 2+ YEARS EXPERIENCE
       </span>
       <span
         aria-hidden="true"
-        className="absolute bottom-40 left-0 right-0 text-center rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+        className="absolute bottom-40 left-0 right-0 text-center rotate-12 text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
       >
         FULL-STACK AI/ML ENGINEER
       </span>
@@ -72,7 +72,7 @@ const AboutSection: React.FC = () => {
           transition={{ duration: 0.6 }}
         >
           <motion.h2
-            className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-marrsgreen via-teal-500 to-carrigreen dark:from-carrigreen dark:via-teal-400 dark:to-marrsgreen bg-clip-text text-transparent inline-block"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-carrigreen via-teal-400 to-marrsgreen bg-clip-text text-transparent inline-block"
             initial={{ scale: 0.5, rotateY: 90 }}
             whileInView={{ scale: 1, rotateY: 0 }}
             viewport={{ once: true }}
@@ -100,7 +100,7 @@ const AboutSection: React.FC = () => {
             className="relative"
           >
             <motion.div
-              className="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-500 dark:via-purple-500 dark:to-pink-500 rounded-3xl p-8 md:p-10 text-white shadow-2xl relative overflow-hidden group"
+              className="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-3xl p-8 md:p-10 text-white shadow-2xl relative overflow-hidden group"
               whileHover={{ scale: 1.02, rotate: -1 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
@@ -277,7 +277,7 @@ const AboutSection: React.FC = () => {
             ].map((item, index) => (
               <motion.div
                 key={item.title}
-                className="bg-white dark:bg-[#1B2731] rounded-2xl p-6 shadow-xl border border-gray-100 dark:border-gray-800 relative overflow-hidden group"
+                className="bg-[#1B2731] rounded-2xl p-6 shadow-xl border border-gray-800 relative overflow-hidden group"
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -300,14 +300,14 @@ const AboutSection: React.FC = () => {
                   </motion.div>
 
                   <div className="flex-1 min-w-0">
-                    <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-3">
+                    <h4 className="text-lg font-bold text-white mb-3">
                       {item.title}
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {item.skills.map((skill, idx) => (
                         <motion.span
                           key={skill}
-                          className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-xs font-medium"
+                          className="px-3 py-1 bg-gray-800 text-gray-300 rounded-lg text-xs font-medium"
                           initial={{ opacity: 0, scale: 0 }}
                           whileInView={{ opacity: 1, scale: 1 }}
                           viewport={{ once: true }}
@@ -343,7 +343,7 @@ const AboutSection: React.FC = () => {
           {/* Education */}
           <motion.div
             variants={itemVariants}
-            className="bg-white dark:bg-[#1B2731] rounded-2xl p-6 shadow-xl border border-gray-100 dark:border-gray-800 relative overflow-hidden group"
+            className="bg-[#1B2731] rounded-2xl p-6 shadow-xl border border-gray-800 relative overflow-hidden group"
             whileHover={{ y: -5 }}
           >
             <motion.div
@@ -362,16 +362,16 @@ const AboutSection: React.FC = () => {
               </motion.div>
 
               <div className="flex-1">
-                <h4 className="text-lg font-bold bg-gradient-to-r from-marrsgreen to-teal-600 dark:from-carrigreen dark:to-teal-400 bg-clip-text text-transparent mb-2">
+                <h4 className="text-lg font-bold bg-gradient-to-r from-carrigreen to-teal-400 bg-clip-text text-transparent mb-2">
                   BS Software Engineering
                 </h4>
-                <p className="text-gray-700 dark:text-gray-300 font-medium mb-2">
+                <p className="text-gray-300 font-medium mb-2">
                   COMSATS University Islamabad
                 </p>
                 <div className="flex items-center gap-2">
-                  <span className="text-sm text-gray-600 dark:text-gray-400">2020 - 2024</span>
+                  <span className="text-sm text-gray-400">2020 - 2024</span>
                   <motion.span
-                    className="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded text-xs font-medium"
+                    className="px-2 py-1 bg-green-900/30 text-green-400 rounded text-xs font-medium"
                     initial={{ opacity: 0, scale: 0 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
@@ -388,7 +388,7 @@ const AboutSection: React.FC = () => {
           {/* Interests */}
           <motion.div
             variants={itemVariants}
-            className="bg-white dark:bg-[#1B2731] rounded-2xl p-6 shadow-xl border border-gray-100 dark:border-gray-800 relative overflow-hidden group"
+            className="bg-[#1B2731] rounded-2xl p-6 shadow-xl border border-gray-800 relative overflow-hidden group"
             whileHover={{ y: -5 }}
           >
             <motion.div
@@ -406,7 +406,7 @@ const AboutSection: React.FC = () => {
                 >
                   ❤️
                 </motion.div>
-                <h4 className="text-lg font-bold text-gray-900 dark:text-white">
+                <h4 className="text-lg font-bold text-white">
                   Interests & Hobbies
                 </h4>
               </div>
@@ -421,7 +421,7 @@ const AboutSection: React.FC = () => {
                 ].map((interest, idx) => (
                   <motion.div
                     key={interest.name}
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-gray-100 to-gray-50 dark:from-gray-800 dark:to-gray-700 rounded-full border border-gray-200 dark:border-gray-600"
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-gray-800 to-gray-700 rounded-full border border-gray-600"
                     initial={{ opacity: 0, scale: 0, rotate: -90 }}
                     whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
                     viewport={{ once: true }}
@@ -437,7 +437,7 @@ const AboutSection: React.FC = () => {
                     }}
                   >
                     <span className="text-base">{interest.icon}</span>
-                    <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
+                    <span className="text-xs font-medium text-gray-300">
                       {interest.name}
                     </span>
                   </motion.div>

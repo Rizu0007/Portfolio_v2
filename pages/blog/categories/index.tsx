@@ -65,8 +65,8 @@ const Blog: NextPage<Props> = ({ categories, categorizedPosts }) => {
     <>
       <AppHead title="Blog - Sat Naing" />
       <Loader>Categories</Loader>
-      <div ref={sectionRef} className="bg-bglight dark:bg-bgdark">
-        <div className="selection:bg-marrsgreen selection:text-bglight dark:selection:bg-carrigreen dark:selection:text-bgdark">
+      <div ref={sectionRef} className="bg-bgdark">
+        <div className="selection:bg-carrigreen selection:text-bgdark">
           <SkipToMain />
           <BlogHeader />
           <SocialLinks />
@@ -81,7 +81,7 @@ const Blog: NextPage<Props> = ({ categories, categorizedPosts }) => {
                     href={`/blog/categories/${slugify(category)}`}
                     className="inline-block link-outline"
                   >
-                    <h2 className="category-title overflow-hidden text-xl font-medium pl-2 border-l-4 hover:text-marrsgreen dark:hover:text-carrigreen border-marrsgreen dark:border-carrigreen">
+                    <h2 className="category-title overflow-hidden text-xl font-medium pl-2 border-l-4 hover:text-carrigreen border-carrigreen">
                       <span className="category-title-text inline-block">
                         {category}
                       </span>

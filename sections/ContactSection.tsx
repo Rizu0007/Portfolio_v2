@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { RoughNotation } from "react-rough-notation";
-import { useTheme } from "next-themes";
 
 import LinkButton from "@/components/LinkButton";
 import { useSection } from "context/section";
@@ -10,8 +9,6 @@ import useOnScreen from "hooks/useOnScreen";
 import useScrollActive from "hooks/useScrollActive";
 
 const ContactSection: React.FC = () => {
-  const { theme } = useTheme();
-
   const sectionRef = useRef<HTMLDivElement>(null);
   const isSecOnScreen = useOnScreen(sectionRef);
 
@@ -118,23 +115,23 @@ const ContactSection: React.FC = () => {
         <div className="text-center contact-wrapper mb-12">
           <RoughNotation
             type="underline"
-            color={`${theme === "light" ? "rgb(0, 122, 122)" : "rgb(5 206 145)"}`}
+            color="rgb(5 206 145)"
             strokeWidth={2}
             order={1}
             show={isOnScreen}
           >
-            <h2 className="text-4xl md:text-5xl inline-block font-bold bg-gradient-to-r from-marrsgreen via-teal-500 to-carrigreen dark:from-carrigreen dark:via-teal-400 dark:to-marrsgreen bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl inline-block font-bold bg-gradient-to-r from-carrigreen via-teal-400 to-marrsgreen bg-clip-text text-transparent">
               Let's Connect
             </h2>
           </RoughNotation>
 
           {/* Availability Badge */}
-          <div className="mt-6 inline-flex items-center gap-2 px-4 py-2 bg-green-50 dark:bg-green-900/30 border-2 border-green-200 dark:border-green-700 rounded-full">
+          <div className="mt-6 inline-flex items-center gap-2 px-4 py-2 bg-green-900/30 border-2 border-green-700 rounded-full">
             <span className="relative flex h-3 w-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
             </span>
-            <span className="text-sm font-semibold text-green-700 dark:text-green-400">
+            <span className="text-sm font-semibold text-green-400">
               Available for opportunities
             </span>
           </div>
@@ -149,7 +146,7 @@ const ContactSection: React.FC = () => {
             Let's build something amazing together!
           </h3>
           <p
-            className="mb-8 mx-auto max-w-2xl text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed"
+            className="mb-8 mx-auto max-w-2xl text-lg md:text-xl text-gray-400 leading-relaxed"
             ref={descRef}
           >
             I'm driven by my passion for coding and hunger for new challenges. Whether you have opportunities for collaboration or want to create something extraordinary, I'd love to hear from you!
@@ -161,7 +158,7 @@ const ContactSection: React.FC = () => {
           {/* Email Card */}
           <a
             href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}
-            className="contact-card group cursor-pointer rounded-xl bg-white dark:bg-[#1B2731] shadow-md hover:shadow-xl border border-gray-200 dark:border-gray-700 p-8 transition-all duration-300 hover:-translate-y-1"
+            className="contact-card group cursor-pointer rounded-xl bg-[#1B2731] shadow-md hover:shadow-xl border border-gray-700 p-8 transition-all duration-300 hover:-translate-y-1"
           >
             <div className="flex flex-col items-center gap-4">
               <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
@@ -170,8 +167,8 @@ const ContactSection: React.FC = () => {
                 </svg>
               </div>
               <div className="text-center">
-                <h4 className="font-bold text-lg mb-1 text-gray-900 dark:text-white">Email</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Drop me a line</p>
+                <h4 className="font-bold text-lg mb-1 text-white">Email</h4>
+                <p className="text-sm text-gray-400">Drop me a line</p>
               </div>
             </div>
           </a>
@@ -181,7 +178,7 @@ const ContactSection: React.FC = () => {
             href="https://www.linkedin.com/in/rizwan-ahmad-87135a262/"
             target="_blank"
             rel="noreferrer"
-            className="contact-card group cursor-pointer rounded-xl bg-white dark:bg-[#1B2731] shadow-md hover:shadow-xl border border-gray-200 dark:border-gray-700 p-8 transition-all duration-300 hover:-translate-y-1"
+            className="contact-card group cursor-pointer rounded-xl bg-[#1B2731] shadow-md hover:shadow-xl border border-gray-700 p-8 transition-all duration-300 hover:-translate-y-1"
           >
             <div className="flex flex-col items-center gap-4">
               <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
@@ -190,8 +187,8 @@ const ContactSection: React.FC = () => {
                 </svg>
               </div>
               <div className="text-center">
-                <h4 className="font-bold text-lg mb-1 text-gray-900 dark:text-white">LinkedIn</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Let's connect</p>
+                <h4 className="font-bold text-lg mb-1 text-white">LinkedIn</h4>
+                <p className="text-sm text-gray-400">Let's connect</p>
               </div>
             </div>
           </a>
@@ -201,7 +198,7 @@ const ContactSection: React.FC = () => {
             href="https://github.com/Rizu0007"
             target="_blank"
             rel="noreferrer"
-            className="contact-card group cursor-pointer rounded-xl bg-white dark:bg-[#1B2731] shadow-md hover:shadow-xl border border-gray-200 dark:border-gray-700 p-8 transition-all duration-300 hover:-translate-y-1"
+            className="contact-card group cursor-pointer rounded-xl bg-[#1B2731] shadow-md hover:shadow-xl border border-gray-700 p-8 transition-all duration-300 hover:-translate-y-1"
           >
             <div className="flex flex-col items-center gap-4">
               <div className="w-14 h-14 rounded-full bg-gradient-to-br from-gray-800 to-gray-600 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
@@ -210,8 +207,8 @@ const ContactSection: React.FC = () => {
                 </svg>
               </div>
               <div className="text-center">
-                <h4 className="font-bold text-lg mb-1 text-gray-900 dark:text-white">GitHub</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Check my work</p>
+                <h4 className="font-bold text-lg mb-1 text-white">GitHub</h4>
+                <p className="text-sm text-gray-400">Check my work</p>
               </div>
             </div>
           </a>

@@ -42,7 +42,7 @@ const BlogHeroSection: React.FC = () => {
         <div className="overflow-hidden py-1">
           <h1 className="main-header text-4xl lg:text-5xl font-bold">
             Sat Naing's{" "}
-            <span className="text-marrsgreen dark:text-carrigreen">Blog</span>
+            <span className="text-carrigreen">Blog</span>
           </h1>
         </div>
         <div>
@@ -78,10 +78,10 @@ const BlogHeroSection: React.FC = () => {
       </div>
       <label className="relative block my-4">
         <input
-          className="placeholder:italic placeholder:text-opacity-75 py-3 pr-14 pl-5 
-                    block bg-cardlight dark:bg-carddark w-full rounded shadow-md
-                    border border-cardlight dark:border-carddark border-opacity-40 
-                    focus:outline-none focus:border-marrslight focus:dark:border-carrilight"
+          className="placeholder:italic placeholder:text-opacity-75 py-3 pr-14 pl-5
+                    block bg-carddark w-full rounded shadow-md
+                    border border-carddark border-opacity-40
+                    focus:outline-none focus:border-carrilight"
           placeholder="Search for anything..."
           type="text"
           name="search"
@@ -96,7 +96,7 @@ const BlogHeroSection: React.FC = () => {
             width="24"
             height="24"
             aria-hidden="true"
-            className="fill-marrsgreen dark:fill-carrigreen"
+            className="fill-carrigreen"
           >
             <path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path>
           </svg>
