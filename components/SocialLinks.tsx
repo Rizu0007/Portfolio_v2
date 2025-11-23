@@ -12,11 +12,11 @@ const SocialLinks: React.FC<{ page?: string }> = ({ page }) => {
                 title={nav.text}
                 href={nav.url}
                 key={nav.url}
-                className={`transition-all outline-marrsdark dark:outline-textlight hover:bg-marrsgreen dark:hover:bg-carrigreen ${
+                className={`transition-all outline-textlight hover:bg-carrigreen ${
                   currentSection === nav.text.toLowerCase()
-                    ? "bg-marrsgreen dark:bg-carrigreen rotate-0"
+                    ? "bg-carrigreen rotate-0"
                     : "opacity-50 focus-visible:opacity-100 hover:opacity-80 rotate-45 hover:rotate-12"
-                } w-3 h-3 border-2 border-marrsgreen dark:border-carrigreen`}
+                } w-3 h-3 border-2 border-carrigreen`}
               ></a>
             );
           })}
@@ -26,12 +26,12 @@ const SocialLinks: React.FC<{ page?: string }> = ({ page }) => {
           <div className="-rotate-90 text-lg tracking-widest">
             <a
               href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}
-              className="link-outline hover:text-marrsgreen dark:hover:text-carrigreen"
+              className="link-outline hover:text-carrigreen"
             >
               {process.env.NEXT_PUBLIC_EMAIL}
             </a>
           </div>
-          <div className="w-40 h-1 bg-bgdark dark:bg-bglight rotate-90"></div>
+          <div className="w-40 h-1 bg-bglight rotate-90"></div>
         </div>
       )}
       <div className="hidden fixed right-10 bottom-0 md:flex flex-col w-6 h-[17rem] items-center justify-between">
@@ -47,7 +47,7 @@ const SocialLinks: React.FC<{ page?: string }> = ({ page }) => {
             </a>
           ))}
         </div>
-        <div className="w-40 h-1 bg-bgdark dark:bg-bglight rotate-90"></div>
+        <div className="w-40 h-1 bg-bglight rotate-90"></div>
       </div>
     </>
   );
@@ -63,7 +63,7 @@ const socialLinks = [
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
-        className="dark:fill-bglight hover:fill-marrsgreen dark:hover:fill-carrigreen"
+        className="fill-bglight hover:fill-carrigreen"
       >
         <path
           fillRule="evenodd"
@@ -83,7 +83,7 @@ const socialLinks = [
         width="24"
         height="24"
         viewBox="0 0 24 24"
-        className="dark:fill-bglight hover:fill-marrsgreen dark:hover:fill-carrigreen"
+        className="fill-bglight hover:fill-carrigreen"
       >
         <path d="M20 3H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM8.339 18.337H5.667v-8.59h2.672v8.59zM7.003 8.574a1.548 1.548 0 1 1 0-3.096 1.548 1.548 0 0 1 0 3.096zm11.335 9.763h-2.669V14.16c0-.996-.018-2.277-1.388-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248h-2.667v-8.59h2.56v1.174h.037c.355-.675 1.227-1.387 2.524-1.387 2.704 0 3.203 1.778 3.203 4.092v4.71z"></path>
       </svg>
@@ -98,7 +98,7 @@ const socialLinks = [
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
-        className="dark:fill-bglight hover:fill-marrsgreen dark:hover:fill-carrigreen"
+        className="fill-bglight hover:fill-carrigreen"
       >
         <path d="M7.826 10.083a.784.784 0 0 0-.468-.175h-.701v4.198h.701a.786.786 0 0 0 .469-.175c.155-.117.233-.292.233-.525v-2.798c.001-.233-.079-.408-.234-.525zM19.236 3H4.764C3.791 3 3.002 3.787 3 4.76v14.48c.002.973.791 1.76 1.764 1.76h14.473c.973 0 1.762-.787 1.764-1.76V4.76A1.765 1.765 0 0 0 19.236 3zM9.195 13.414c0 .755-.466 1.901-1.942 1.898H5.389V8.665h1.903c1.424 0 1.902 1.144 1.903 1.899v2.85zm4.045-3.562H11.1v1.544h1.309v1.188H11.1v1.543h2.142v1.188h-2.498a.813.813 0 0 1-.833-.792V9.497a.813.813 0 0 1 .792-.832h2.539l-.002 1.187zm4.165 4.632c-.531 1.235-1.481.99-1.906 0l-1.548-5.818h1.309l1.193 4.569 1.188-4.569h1.31l-1.546 5.818z"></path>
       </svg>
@@ -113,7 +113,7 @@ const socialLinks = [
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
-        className="dark:fill-bglight hover:fill-marrsgreen dark:hover:fill-carrigreen"
+        className="fill-bglight hover:fill-carrigreen"
       >
         <path d="M12.001 2.002c-5.522 0-9.999 4.477-9.999 9.999 0 4.99 3.656 9.126 8.437 9.879v-6.988h-2.54v-2.891h2.54V9.798c0-2.508 1.493-3.891 3.776-3.891 1.094 0 2.24.195 2.24.195v2.459h-1.264c-1.24 0-1.628.772-1.628 1.563v1.875h2.771l-.443 2.891h-2.328v6.988C18.344 21.129 22 16.992 22 12.001c0-5.522-4.477-9.999-9.999-9.999z" />
       </svg>

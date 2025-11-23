@@ -42,8 +42,8 @@ const Blog: NextPage<Props> = ({ tags, tagCounts }) => {
     <>
       <AppHead title="Blog - Sat Naing" />
       <Loader>Tags</Loader>
-      <div ref={sectionRef} className="bg-bglight dark:bg-bgdark min-h-screen">
-        <div className="selection:bg-marrsgreen selection:text-bglight dark:selection:bg-carrigreen dark:selection:text-bgdark">
+      <div ref={sectionRef} className="bg-bgdark min-h-screen">
+        <div className="selection:bg-carrigreen selection:text-bgdark">
           <SkipToMain />
           <BlogHeader />
           <SocialLinks />

@@ -56,19 +56,19 @@ const EduGroup: React.FC<Props> = ({ edu }) => {
     <div className="edu-group mb-4" ref={sectionRef}>
       <div className="overflow-hidden">
         <h3
-          className={`edu-heading text-marrsgreen dark:text-carrigreen text-lg font-medium`}
+          className={`edu-heading text-carrigreen text-lg font-medium`}
         >
           {edu.title}
         </h3>
       </div>
       <div className="overflow-hidden">
-        <span className={`edu-info text-slate-500 dark:text-slate-200 italic`}>
+        <span className={`edu-info text-slate-200 italic`}>
           {edu.subTitle}
         </span>
       </div>
       <ul
         role="list"
-        className=" marker:text-marrsgreen dark:marker:text-carrigreen list-disc pl-6 space-y-1 mt-1"
+        className="marker:text-carrigreen list-disc pl-6 space-y-1 mt-1"
       >
         {edu.list.map((li) => (
           <li key={li} className={`edu-list`}>

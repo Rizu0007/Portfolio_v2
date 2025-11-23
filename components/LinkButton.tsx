@@ -18,9 +18,9 @@ const LinkButton: React.FC<Props> = ({
       role="button"
       className={`${
         outline
-          ? "border border-marrsgreen hover:bg-marrsgreen dark:border-carrigreen dark:hover:bg-carrigreen text-marrsgreen hover:text-cardlight dark:text-carrigreen dark:hover:text-carddark transition"
-          : "bg-gray-100 hover:bg-marrslight active:bg-marrsdark dark:hover:bg-carrilight dark:active:bg-carridark dark:bg-carrigreen text-bglight dark:text-bgdark"
-      } py-2 px-3 rounded lg:text-xl ${className} outline-marrsgreen dark:outline-carrigreen focus-visible:outline-double outline-offset-2`}
+          ? "border border-carrigreen hover:bg-carrigreen text-carrigreen hover:text-carddark transition"
+          : "bg-carrigreen hover:bg-carrilight active:bg-carridark text-bgdark"
+      } py-2 px-3 rounded lg:text-xl ${className} outline-carrigreen focus-visible:outline-double outline-offset-2`}
       href={href}
       target={`${targetBlank ? "_blank" : "_self"}`}
     >

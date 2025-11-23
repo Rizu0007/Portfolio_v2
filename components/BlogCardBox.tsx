@@ -21,7 +21,7 @@ const BlogCardBox: React.FC<Props> = ({
   const { title, slug, excerpt, datetime } = post;
   return (
     <li
-      className={`blog-card-box sm:min-w-[17rem] bg-gray-100 dark:bg-carddark p-4 rounded shadow hover:shadow-md ${
+      className={`blog-card-box sm:min-w-[17rem] bg-carddark p-4 rounded shadow hover:shadow-md ${
         fullWH ? "w-full" : "w-72 my-2"
       } ${className}`}
     >
@@ -36,7 +36,7 @@ const BlogCardBox: React.FC<Props> = ({
           </h3>
         </Link>
       </div>
-      <div className="italic text-sm mb-1 text-carddark dark:text-gray-300 flex items-center">
+      <div className="italic text-sm mb-1 text-gray-300 flex items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-4 w-4 mr-2"
@@ -55,7 +55,7 @@ const BlogCardBox: React.FC<Props> = ({
         <DateTime datetime={datetime} />
       </div>
       <p
-        className={`dark:text-gray-300 ${
+        className={`text-gray-300 ${
           fullWH ? "text-base sm:text-sm" : "text-sm w-60"
         } overflow-hidden`}
       >
