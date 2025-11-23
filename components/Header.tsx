@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { useTheme } from "next-themes";
 import gsap from "gsap";
 
 import useScrollListener from "hooks/useScrollListener";
@@ -47,13 +46,11 @@ const navLinks = [
 ];
 
 const Header: React.FC = () => {
-  const { theme, setTheme } = useTheme();
   const { currentSection } = useSection();
   const [navClassList, setNavClassList] = useState<any>([]);
   const scroll = useScrollListener();
 
   const mainRef = useRef(null);
-  const themeBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     gsap.fromTo(
@@ -62,14 +59,6 @@ const Header: React.FC = () => {
       { top: 0, duration: 0.7, delay: 1, ease: "Power0.easeNone" }
     );
   }, []);
-
-  // update theme button aria-label according to theme value
-  useEffect(() => {
-    const themeBtn = themeBtnRef.current;
-    if (themeBtn) {
-      themeBtn.ariaLabel = theme ?? "light";
-    }
-  }, [theme]);
 
   // update classList of nav on scroll
   useEffect(() => {
