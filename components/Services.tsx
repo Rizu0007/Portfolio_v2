@@ -219,19 +219,19 @@ const Myskills = () => {
       {/* Background animated text */}
       <span
         aria-hidden="true"
-        className="absolute top-10 left-0 right-0 text-center rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+        className="absolute top-10 left-0 right-0 text-center rotate-12 text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
       >
         REACT NEXT.JS NODE.JS TYPESCRIPT
       </span>
       <span
         aria-hidden="true"
-        className="absolute top-96 left-0 right-0 text-center -rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+        className="absolute top-96 left-0 right-0 text-center -rotate-12 text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
       >
         LANGCHAIN POSTGRESQL QDRANT
       </span>
       <span
         aria-hidden="true"
-        className="absolute bottom-20 left-0 right-0 text-center rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+        className="absolute bottom-20 left-0 right-0 text-center rotate-12 text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
       >
         MONGODB EXPRESS NEST.JS GRAPHQL
       </span>
@@ -241,13 +241,13 @@ const Myskills = () => {
         <div className="text-center mb-20">
           <h1
             ref={headingRef}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-marrsgreen via-teal-500 to-carrigreen dark:from-carrigreen dark:via-teal-400 dark:to-marrsgreen bg-clip-text text-transparent"
+            className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-carrigreen via-teal-400 to-marrsgreen bg-clip-text text-transparent"
           >
             My Development Skills
           </h1>
           <p
             ref={descRef}
-            className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed"
           >
             Crafting exceptional digital experiences with cutting-edge technologies
           </p>
@@ -264,7 +264,7 @@ const Myskills = () => {
                 className="skill-card relative group cursor-pointer flex flex-col items-center gap-3"
               >
                 {/* Circular Card Container */}
-                <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full bg-white dark:bg-[#1B2731] shadow-xl hover:shadow-2xl border-2 border-gray-100 dark:border-gray-800 overflow-hidden transition-all duration-500 hover:scale-110">
+                <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#1B2731] shadow-xl hover:shadow-2xl border-2 border-gray-800 overflow-hidden transition-all duration-500 hover:scale-110">
 
                   {/* Subtle always-on gradient glow */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${skill.gradient} opacity-5`} />
@@ -277,12 +277,12 @@ const Myskills = () => {
 
                   {/* Icon centered */}
                   <div className="relative z-10 flex items-center justify-center w-full h-full">
-                    <IconComponent className="text-3xl md:text-4xl transition-all duration-500 group-hover:scale-110 text-gray-700 dark:text-gray-200 group-hover:text-gray-900 dark:group-hover:text-white" />
+                    <IconComponent className="text-3xl md:text-4xl transition-all duration-500 group-hover:scale-110 text-gray-200 group-hover:text-white" />
                   </div>
                 </div>
 
                 {/* Skill name - always visible */}
-                <span className="text-xs md:text-sm font-semibold text-gray-700 dark:text-gray-300 text-center transition-colors duration-300 group-hover:text-gray-900 dark:group-hover:text-white">
+                <span className="text-xs md:text-sm font-semibold text-gray-300 text-center transition-colors duration-300 group-hover:text-white">
                   {skill.name}
                 </span>
               </div>

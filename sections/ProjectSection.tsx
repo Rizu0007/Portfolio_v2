@@ -3,7 +3,6 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { RoughNotation } from "react-rough-notation";
-import { useTheme } from "next-themes";
 import coin from '.././public/projects/coin.png'
 import portfo from '.././public/projects/portfo.png'
 import comsats from '.././public/projects/comsats.png'
@@ -22,8 +21,6 @@ import house from 'public/3.png'
 import blog from 'public/4.png'
 
 const ProjectSection: React.FC = () => {
-  const { theme } = useTheme();
-
   const sectionRef = useRef<HTMLDivElement>(null);
   const elementRef = useRef<HTMLDivElement>(null);
   const isOnScreen = useOnScreen(elementRef);
@@ -100,19 +97,19 @@ const ProjectSection: React.FC = () => {
       {/* Background animated text */}
       <span
         aria-hidden="true"
-        className="absolute top-10 left-0 right-0 text-center rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+        className="absolute top-10 left-0 right-0 text-center rotate-12 text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
       >
         INNOVATIVE SOLUTIONS
       </span>
       <span
         aria-hidden="true"
-        className="absolute top-96 left-0 right-0 text-center -rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+        className="absolute top-96 left-0 right-0 text-center -rotate-12 text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
       >
         SCALABLE APPLICATIONS
       </span>
       <span
         aria-hidden="true"
-        className="absolute bottom-40 left-0 right-0 text-center rotate-12 text-gray-100 dark:text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
+        className="absolute bottom-40 left-0 right-0 text-center rotate-12 text-[#1f2e3a] text-8xl md:text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none z-0 opacity-50"
       >
         RAG CHATBOT FINTECH BLOCKCHAIN
       </span>
@@ -121,7 +118,7 @@ const ProjectSection: React.FC = () => {
       <div className="project-title text-center">
         <RoughNotation
           type="underline"
-          color={`${theme === "light" ? "rgb(0, 122, 122)" : "rgb(5 206 145)"}`}
+          color="rgb(5 206 145)"
           strokeWidth={2}
           order={1}
           show={isOnScreen}
@@ -142,7 +139,7 @@ const ProjectSection: React.FC = () => {
         Other projects can be explored in{" "}
         <a
           href="https://github.com/Rizu0007"
-          className="font-medium underline link-outline text-marrsgreen dark:text-carrigreen whitespace-nowrap"
+          className="font-medium underline link-outline text-carrigreen whitespace-nowrap"
         >
           my github profile
         </a>

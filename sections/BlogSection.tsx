@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { useTheme } from "next-themes";
 import { RoughNotation } from "react-rough-notation";
 
 import { useSection } from "context/section";
@@ -25,8 +24,6 @@ type Props = {
 };
 
 const BlogSection: React.FC<Props> = ({ posts }) => {
-  const { theme } = useTheme();
-
   const sectionRef = useRef<HTMLDivElement>(null);
   const elementRef = useRef<HTMLDivElement>(null);
   const swiperRef = useRef<HTMLDivElement>(null);
@@ -106,14 +103,12 @@ const BlogSection: React.FC<Props> = ({ posts }) => {
   }, []);
 
   return (
-    <div className="bg-[#F5F5F5] dark:bg-[#1B2731]">
+    <div className="bg-[#1B2731]">
       <section ref={sectionRef} id="blog" className="section md:px-10">
         <div className="text-center blog-heading-wrapper">
           <RoughNotation
             type="underline"
-            color={`${
-              theme === "light" ? "rgb(0, 122, 122)" : "rgb(5 206 145)"
-            }`}
+            color="rgb(5 206 145)"
             strokeWidth={2}
             order={1}
             show={isOnScreen}

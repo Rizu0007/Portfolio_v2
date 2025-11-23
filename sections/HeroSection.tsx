@@ -274,7 +274,7 @@ const HeroSection: React.FC = () => {
       {/* Background animated text */}
       <span
         aria-hidden="true"
-        className="bg-text absolute -top-36 rotate-12 text-gray-100 dark:text-[#1f2e3a] text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none text-center z-0"
+        className="bg-text absolute -top-36 rotate-12 text-[#1f2e3a] text-9xl scale-150 tracking-wide font-bold select-none pointer-events-none text-center z-0"
       >
         AI DEVELOPER FULL-STACK BLOCKCHAIN MERN RAG SYSTEMS
       </span>
@@ -282,7 +282,7 @@ const HeroSection: React.FC = () => {
       {/* Floating illustration with glow */}
       <div className="image-animation z-10 select-none mt-0 xs:mt-6 sm:mt-14 lg:mt-0 px-0 mx-auto lg:p-0 lg:basis-1/3 relative">
         {/* Glow effect behind illustration */}
-        <div className="absolute inset-0 bg-gradient-to-r from-marrsgreen/20 via-teal-500/20 to-carrigreen/20 dark:from-carrigreen/20 dark:via-teal-400/20 dark:to-marrsgreen/20 blur-3xl rounded-full scale-110 animate-pulse" />
+        <div className="absolute inset-0 bg-gradient-to-r from-carrigreen/20 via-teal-400/20 to-marrsgreen/20 blur-3xl rounded-full scale-110 animate-pulse" />
 
         <div className="relative w-72 md:w-80 h-80 flex items-center mx-auto">
           <div className="absolute pointer-events-none scale-90 xs:scale-95 mx-auto">
@@ -314,20 +314,20 @@ const HeroSection: React.FC = () => {
         <div className="spotlight absolute inset-0 pointer-events-none rounded-3xl" />
 
         {/* Greeting */}
-        <span className="greeting text-base lg:text-lg font-medium text-marrsgreen dark:text-carrigreen block mb-2">
+        <span className="greeting text-base lg:text-lg font-medium text-carrigreen block mb-2">
           <span className="wave-emoji inline-block">👋</span> Hi, I'm
         </span>
 
         {/* Name with 3D effect */}
         <div className="overflow-hidden mb-2">
-          <h1 className="name text-4xl md:text-5xl lg:text-7xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-white dark:via-gray-100 dark:to-white bg-clip-text text-transparent">
+          <h1 className="name text-4xl md:text-5xl lg:text-7xl font-bold bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent">
             RIZWAN ALI
           </h1>
         </div>
 
         {/* Title with gradient */}
         <div className="overflow-hidden mb-4">
-          <h2 className="title text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-marrsgreen via-teal-600 to-carrigreen dark:from-carrigreen dark:via-teal-400 dark:to-marrsgreen bg-clip-text text-transparent">
+          <h2 className="title text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-carrigreen via-teal-400 to-marrsgreen bg-clip-text text-transparent">
             <span className="title-word inline-block">Innovative</span>{" "}
             <span className="title-word inline-block">Full</span>{" "}
             <span className="title-word inline-block">Stack</span>{" "}
@@ -337,22 +337,22 @@ const HeroSection: React.FC = () => {
 
         {/* Description with highlights */}
         <div className="mt-6 space-y-4">
-          <p className="description text-base md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-            <span className="font-semibold text-marrsgreen dark:text-carrigreen">2+ years of experience</span> in designing, developing, and optimizing scalable web applications with expertise in{" "}
-            <span className="font-semibold text-amber-600 dark:text-amber-500">MERN stack</span>,{" "}
-            <span className="font-semibold text-purple-600 dark:text-purple-400">AI/ML integrations</span>, and{" "}
-            <span className="font-semibold text-blue-600 dark:text-blue-400">blockchain technology</span>.
+          <p className="description text-base md:text-lg text-gray-300 leading-relaxed">
+            <span className="font-semibold text-carrigreen">2+ years of experience</span> in designing, developing, and optimizing scalable web applications with expertise in{" "}
+            <span className="font-semibold text-amber-500">MERN stack</span>,{" "}
+            <span className="font-semibold text-purple-400">AI/ML integrations</span>, and{" "}
+            <span className="font-semibold text-blue-400">blockchain technology</span>.
           </p>
 
-          <p className="description text-base md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+          <p className="description text-base md:text-lg text-gray-300 leading-relaxed">
             Passionate about building impactful solutions with{" "}
-            <span className="tech-badge inline-block px-2 py-1 bg-gradient-to-r from-yellow-100 to-amber-100 dark:from-yellow-900/30 dark:to-amber-900/30 rounded text-sm font-medium">
+            <span className="tech-badge inline-block px-2 py-1 bg-gradient-to-r from-yellow-900/30 to-amber-900/30 rounded text-sm font-medium">
               RAG systems
             </span>{" "}
-            <span className="tech-badge inline-block px-2 py-1 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900/30 dark:to-emerald-900/30 rounded text-sm font-medium">
+            <span className="tech-badge inline-block px-2 py-1 bg-gradient-to-r from-green-900/30 to-emerald-900/30 rounded text-sm font-medium">
               LangChain
             </span>{" "}
-            <span className="tech-badge inline-block px-2 py-1 bg-gradient-to-r from-blue-100 to-cyan-100 dark:from-blue-900/30 dark:to-cyan-900/30 rounded text-sm font-medium">
+            <span className="tech-badge inline-block px-2 py-1 bg-gradient-to-r from-blue-900/30 to-cyan-900/30 rounded text-sm font-medium">
               MCP
             </span>
           </p>
@@ -361,7 +361,7 @@ const HeroSection: React.FC = () => {
         {/* Buttons with magnetic effect */}
         <div className="flex gap-4 mt-8 flex-wrap">
           <button
-            className="hero-button magnetic-button group relative px-8 py-4 bg-gradient-to-r from-marrsgreen to-teal-600 dark:from-carrigreen dark:to-teal-500 text-white font-bold rounded-2xl overflow-hidden transform-gpu transition-all duration-300 hover:shadow-2xl hover:shadow-marrsgreen/50 dark:hover:shadow-carrigreen/50"
+            className="hero-button magnetic-button group relative px-8 py-4 bg-gradient-to-r from-carrigreen to-teal-500 text-white font-bold rounded-2xl overflow-hidden transform-gpu transition-all duration-300 hover:shadow-2xl hover:shadow-carrigreen/50"
             onClick={onButtonClick}
           >
             <span className="relative z-10 flex items-center gap-2">
@@ -374,7 +374,7 @@ const HeroSection: React.FC = () => {
 
           <a
             href="#whoami"
-            className="hero-button magnetic-button group relative px-8 py-4 bg-white dark:bg-gray-800 border-2 border-marrsgreen dark:border-carrigreen text-marrsgreen dark:text-carrigreen font-bold rounded-2xl transform-gpu transition-all duration-300 hover:bg-marrsgreen hover:text-white dark:hover:bg-carrigreen dark:hover:text-gray-900"
+            className="hero-button magnetic-button group relative px-8 py-4 bg-gray-800 border-2 border-carrigreen text-carrigreen font-bold rounded-2xl transform-gpu transition-all duration-300 hover:bg-carrigreen hover:text-gray-900"
           >
             <span className="relative z-10">Contact Me!</span>
           </a>
@@ -386,14 +386,14 @@ const HeroSection: React.FC = () => {
         href="#whoami"
         className="scroll-indicator group absolute link-outline animate-bounce hidden md:bottom-14 lg:bottom-16 left-1/2 transform -translate-x-1/2 md:flex items-center flex-col opacity-70 hover:opacity-100 transition-opacity"
       >
-        <span className="text-sm group-hover:text-marrsgreen dark:group-hover:text-carrigreen transition-colors">
+        <span className="text-sm group-hover:text-carrigreen transition-colors">
           Scroll
         </span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
-          className="dark:fill-bglight group-hover:fill-marrsgreen dark:group-hover:fill-carrigreen transition-colors"
+          className="fill-bglight group-hover:fill-carrigreen transition-colors"
         >
           <path d="M11.975 22H12c3.859 0 7-3.14 7-7V9c0-3.841-3.127-6.974-6.981-7h-.06C8.119 2.022 5 5.157 5 9v6c0 3.86 3.129 7 6.975 7zM7 9a5.007 5.007 0 0 1 4.985-5C14.75 4.006 17 6.249 17 9v6c0 2.757-2.243 5-5 5h-.025C9.186 20 7 17.804 7 15V9z"></path>
           <path d="M11 6h2v6h-2z"></path>
@@ -402,7 +402,7 @@ const HeroSection: React.FC = () => {
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
-          className="dark:fill-bglight group-hover:fill-marrsgreen dark:group-hover:fill-carrigreen transition-colors"
+          className="fill-bglight group-hover:fill-carrigreen transition-colors"
         >
           <path d="M16.293 9.293 12 13.586 7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"></path>
         </svg>

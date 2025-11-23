@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Script from "next/script";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { useTheme } from "next-themes";
 
 import BlogHeader from "@/components/blog/BlogHeader";
 import SkipToMain from "@/components/SkipToMain";
@@ -34,7 +33,6 @@ type Props = {
 };
 
 const BlogLayout: React.FC<Props> = ({ post }) => {
-  const { theme } = useTheme();
   const postUrl = `${process.env.NEXT_PUBLIC_URL}/blog/posts/${post.slug}`;
   return (
     <>
@@ -53,8 +51,8 @@ const BlogLayout: React.FC<Props> = ({ post }) => {
         url={`${process.env.NEXT_PUBLIC_URL}/blog/posts/${post.slug}`}
         meta={post}
       />
-      <div className="bg-bglight dark:bg-bgdark">
-        <div className="selection:bg-marrsgreen selection:text-bglight dark:selection:bg-carrigreen dark:selection:text-bgdark">
+      <div className="bg-bgdark">
+        <div className="selection:bg-carrigreen selection:text-bgdark">
           <SkipToMain />
           <BlogHeader />
           <SocialLinks />
@@ -63,7 +61,7 @@ const BlogLayout: React.FC<Props> = ({ post }) => {
               <h1 className="font-semibold md:font-bold text-3xl md:text-4xl">
                 {post.title}
               </h1>
-              <div className="mt-2 mb-1 italic text-marrsdark dark:text-carrigreen">
+              <div className="mt-2 mb-1 italic text-carrigreen">
                 <DateTime datetime={post.datetime} />
               </div>
               <HeadCategory category={post.category} />
@@ -75,7 +73,7 @@ const BlogLayout: React.FC<Props> = ({ post }) => {
                 </div>
               )}
               {post.coverImage && (
-                <div className="bg-cardlight dark:bg-carddark">
+                <div className="bg-carddark">
                   <Image
                     src={post.coverImage}
                     alt={post.coverImageAlt || "Picture"}

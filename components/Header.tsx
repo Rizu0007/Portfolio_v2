@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { useTheme } from "next-themes";
 import gsap from "gsap";
 
 import useScrollListener from "hooks/useScrollListener";
@@ -47,13 +46,11 @@ const navLinks = [
 ];
 
 const Header: React.FC = () => {
-  const { theme, setTheme } = useTheme();
   const { currentSection } = useSection();
   const [navClassList, setNavClassList] = useState<any>([]);
   const scroll = useScrollListener();
 
   const mainRef = useRef(null);
-  const themeBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     gsap.fromTo(
@@ -62,14 +59,6 @@ const Header: React.FC = () => {
       { top: 0, duration: 0.7, delay: 1, ease: "Power0.easeNone" }
     );
   }, []);
-
-  // update theme button aria-label according to theme value
-  useEffect(() => {
-    const themeBtn = themeBtnRef.current;
-    if (themeBtn) {
-      themeBtn.ariaLabel = theme ?? "light";
-    }
-  }, [theme]);
 
   // update classList of nav on scroll
   useEffect(() => {
@@ -85,28 +74,28 @@ const Header: React.FC = () => {
     <header className="md:flex">
       <div
         ref={mainRef}
-        className={`main-nav lower-glassmorphism bg-bglight dark:bg-bgdark z-30 top-0 shadow-sm fixed duration-400 px-4 sm:px-8 h-16 w-full ${navClassList.join(
+        className={`main-nav lower-glassmorphism bg-bgdark z-30 top-0 shadow-sm fixed duration-400 px-4 sm:px-8 h-16 w-full ${navClassList.join(
           " "
         )}`}
       >
         <div className="w-full h-full mx-auto max-w-6xl flex items-center justify-between">
           <Link
             href="/"
-            className="text-xl font-bold text-carrigreen  sm:text-4xl md:hover:text-white dark:md:hover:text-carrigreen focus-visible:outline-marrsgreen dark:focus-visible:outline-carrigreen"
+            className="text-xl font-bold text-carrigreen sm:text-4xl md:hover:text-carrigreen focus-visible:outline-carrigreen"
           >
             RIZU
             <span className="text-white">.dev</span>
           </Link>
           <nav className="flex items-center">
-            <div className="glassmorphism md:bg-transparent md:dark:bg-transparent md:backdrop-blur-none fixed md:static bottom-4 z-30 left-1/2 md:left-auto transform -translate-x-1/2 md:transform-none bg-bglight dark:bg-carddark dark:text-textlight w-11/12 rounded drop-shadow-lg md:drop-shadow-none">
+            <div className="glassmorphism md:bg-transparent md:backdrop-blur-none fixed md:static bottom-4 z-30 left-1/2 md:left-auto transform -translate-x-1/2 md:transform-none bg-carddark text-textlight w-11/12 rounded drop-shadow-lg md:drop-shadow-none">
               <ul className="flex justify-evenly items-center py-1">
                 {navLinks.map((navLink) => (
                   <li key={navLink.url}>
                     <a
                       href={navLink.url}
-                      className={`text-sm md:text-lg flex flex-col items-center w-[4.5rem] md:w-auto dark:fill-textlight md:mr-6 md:hover:text-marrsgreen md:dark:hover:text-carrigreen link-outline ${
+                      className={`text-sm md:text-lg flex flex-col items-center w-[4.5rem] md:w-auto fill-textlight md:mr-6 md:hover:text-carrigreen link-outline ${
                         currentSection === navLink.text.toLocaleLowerCase() &&
-                        "text-marrsgreen dark:text-carrigreen fill-marrsgreen dark:fill-carrigreen"
+                        "text-carrigreen fill-carrigreen"
                       }`}
                     >
                       <span className="md:hidden">{navLink.svg}</span>
@@ -116,7 +105,7 @@ const Header: React.FC = () => {
                 ))}
               </ul>
             </div>
-           
+
           </nav>
         </div>
       </div>

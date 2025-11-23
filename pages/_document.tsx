@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript } from "next/document";
 
 const Document = () => {
   return (
-    <Html lang="en">
+    <Html lang="en" className="dark">
       <Head>
         <meta charSet="utf-8" />
 
@@ -39,7 +39,7 @@ const Document = () => {
           rel="stylesheet"
         />
       </Head>
-      <body className="bg-bglight dark:bg-bgdark">
+      <body className="bg-bgdark">
         <Main />
         <NextScript />
       </body>
