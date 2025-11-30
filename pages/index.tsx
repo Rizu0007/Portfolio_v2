@@ -48,8 +48,7 @@ const Home: NextPage<Props> = ({ blogPosts }) => {
             <HeroSection />
             <AboutSection />
             <ProjectSection />
-              <ExperienceSection />
-
+            <ExperienceSection />
             <Services/>
             <ContactSection />
           </main>
