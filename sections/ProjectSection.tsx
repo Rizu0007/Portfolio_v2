@@ -318,23 +318,23 @@ const projects = [
     codeUrl: "#",
     bgColor: "",
   },
-  {
-    title: "Hyly.ai - Article Response Generator",
-    image: (
-      <Image
-        src="/projects/hyly.png"
-        sizes="100vw"
-        fill
-        alt="Hyly.ai Platform"
-        className="transition-transform duration-500 hover:scale-110 object-cover"
-      />
-    ),
-    desc: "AI-powered RAG application for intelligent article responses using LangChain orchestration. Designed ETL pipeline extracting data from Notion & HubSpot APIs with optimal document chunking. Built hybrid search with Qdrant vector store featuring semantic retrieval & metadata filtering. Integrated OpenAI LLM with multi-query generation & contextual compression for citation-aware responses. Developed robust RAG architecture with document processing, embedding generation, and retrieval chains. Clean Next.js interface presenting AI content with source references.",
-    tags: ["LangChain", "Qdrant", "OpenAI", "Next.js", "Notion API", "HubSpot API", "RAG"],
-    liveUrl: "https://hyly.ai/",
-    codeUrl: "#",
-    bgColor: "bg-[#6B7FD7]",
-  },
+  // {
+  //   title: "Hyly.ai - Article Response Generator",
+  //   image: (
+  //     <Image
+  //       src="/projects/hyly.png"
+  //       sizes="100vw"
+  //       fill
+  //       alt="Hyly.ai Platform"
+  //       className="transition-transform duration-500 hover:scale-110 object-cover"
+  //     />
+  //   ),
+  //   desc: "AI-powered RAG application for intelligent article responses using LangChain orchestration. Designed ETL pipeline extracting data from Notion & HubSpot APIs with optimal document chunking. Built hybrid search with Qdrant vector store featuring semantic retrieval & metadata filtering. Integrated OpenAI LLM with multi-query generation & contextual compression for citation-aware responses. Developed robust RAG architecture with document processing, embedding generation, and retrieval chains. Clean Next.js interface presenting AI content with source references.",
+  //   tags: ["LangChain", "Qdrant", "OpenAI", "Next.js", "Notion API", "HubSpot API", "RAG"],
+  //   liveUrl: "https://hyly.ai/",
+  //   codeUrl: "#",
+  //   bgColor: "bg-[#6B7FD7]",
+  // },
   {
     title: "Chex.AI - Vehicle Inspection Solution",
     image: (
