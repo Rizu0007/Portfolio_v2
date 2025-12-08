@@ -28,7 +28,7 @@ const HeroSection: React.FC = () => {
           cal.loaded = true;
         }
         if (ar[0] === L) {
-          const api = function () { p(api, arguments); };
+          const api = function () { p(api, arguments); } as any;
           const namespace = ar[1];
           api.q = api.q || [];
           if (typeof namespace === "string") {
